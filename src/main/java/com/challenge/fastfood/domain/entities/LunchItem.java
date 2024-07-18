@@ -1,10 +1,5 @@
 package com.challenge.fastfood.domain.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 
 public class LunchItem {
 

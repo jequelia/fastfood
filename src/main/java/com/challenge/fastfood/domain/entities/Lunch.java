@@ -1,8 +1,6 @@
 package com.challenge.fastfood.domain.entities;
 
 
-import com.challenge.fastfood.adapter.out.repository.lunchItem.LunchItemEntity;
-
 import java.util.List;
 
 public class Lunch {

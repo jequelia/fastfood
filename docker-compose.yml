@@ -25,19 +25,19 @@ services:
     networks:
       - local-network
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-        - MYSQL_URL=jdbc:mysql://mysql:3306/fastfood
-    ports:
-      - "8081:8081"
-    networks:
-      - local-network
-    depends_on:
-      mysql:
-        condition: service_healthy
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    environment:
+#        - MYSQL_URL=jdbc:mysql://mysql:3306/fastfood
+#    ports:
+#      - "8081:8081"
+#    networks:
+#      - local-network
+#    depends_on:
+#      mysql:
+#        condition: service_healthy
 
 networks:
   local-network:
