@@ -1,30 +1,30 @@
 package com.challenge.fastfood.aplication.usecases.lunchItem;
 
-import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
-import com.challenge.fastfood.interfaces.lunchItem.SaveLunchItem;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItemsGatewayInterface;
+import com.challenge.fastfood.interfaces.lunchItem.SaveLunchItemGatewayInterface;
 import com.challenge.fastfood.config.exception.LunchItemException;
 import com.challenge.fastfood.domain.entities.LunchItem;
 
 public class CreateLunchItemUseCase {
 
-    private final SaveLunchItem saveLunchItem  ;
+    private final SaveLunchItemGatewayInterface saveLunchItemGatewayInterface;
 
-    private final FindLunchItems findLunchItems  ;
+    private final FindLunchItemsGatewayInterface findLunchItemsGatewayInterface;
 
-    public CreateLunchItemUseCase(SaveLunchItem   saveLunchItem  , FindLunchItems   findLunchItems  ) {
-        this.saveLunchItem   = saveLunchItem  ;
-        this.findLunchItems   = findLunchItems  ;
+    public CreateLunchItemUseCase(SaveLunchItemGatewayInterface saveLunchItemGatewayInterface, FindLunchItemsGatewayInterface findLunchItemsGatewayInterface) {
+        this.saveLunchItemGatewayInterface = saveLunchItemGatewayInterface;
+        this.findLunchItemsGatewayInterface = findLunchItemsGatewayInterface;
     }
 
     public LunchItem createLunchItem(LunchItem lunchItem) {
 
-        LunchItem lunchItemByName = findLunchItems  .findLunchItemByName(lunchItem.getName());
+        LunchItem lunchItemByName = findLunchItemsGatewayInterface.findLunchItemByName(lunchItem.getName());
         if(lunchItemByName != null){
             throw new LunchItemException("LunchItem already exists");
         }
 
         lunchItem.setStatus(true);
 
-        return saveLunchItem  .saveLunchItem(lunchItem);
+        return saveLunchItemGatewayInterface.saveLunchItem(lunchItem);
     }
 }

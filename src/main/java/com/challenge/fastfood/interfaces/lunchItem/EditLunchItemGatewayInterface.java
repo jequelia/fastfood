@@ -3,7 +3,7 @@ package com.challenge.fastfood.interfaces.lunchItem;
 
 import com.challenge.fastfood.domain.entities.LunchItem;
 
-public interface EditLunchItem {
+public interface EditLunchItemGatewayInterface {
 
     Boolean editStatusLunchItem(Long idLunchItem, Boolean status);
 

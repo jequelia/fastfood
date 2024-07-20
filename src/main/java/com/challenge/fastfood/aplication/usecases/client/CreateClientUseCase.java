@@ -1,19 +1,19 @@
 package com.challenge.fastfood.aplication.usecases.client;
 
 
-import com.challenge.fastfood.interfaces.client.FindClient;
-import com.challenge.fastfood.interfaces.client.SaveClient;
+import com.challenge.fastfood.interfaces.client.FindClientGatewayInterface;
+import com.challenge.fastfood.interfaces.client.SaveClientGatewayInterface;
 import com.challenge.fastfood.config.exception.ClientException;
 import com.challenge.fastfood.domain.entities.Client;
 
 public class CreateClientUseCase  {
 
-    private final SaveClient saveClient;
-    private final FindClient findClient;
+    private final SaveClientGatewayInterface saveClientGatewayInterface;
+    private final FindClientGatewayInterface findClientGatewayInterface;
 
-    public CreateClientUseCase(SaveClient saveClient, FindClient findClient) {
-        this.saveClient = saveClient;
-        this.findClient = findClient;
+    public CreateClientUseCase(SaveClientGatewayInterface saveClientGatewayInterface, FindClientGatewayInterface findClientGatewayInterface) {
+        this.saveClientGatewayInterface = saveClientGatewayInterface;
+        this.findClientGatewayInterface = findClientGatewayInterface;
     }
 
     public Client createClient(Client client) {
@@ -34,7 +34,7 @@ public class CreateClientUseCase  {
             throw new ClientException("Invalid email, max 100 characters");
         }
 
-        Client clientFind = findClient.findClient(client.getCpf());
+        Client clientFind = findClientGatewayInterface.findClient(client.getCpf());
 
         if(clientFind != null ){
             if (clientFind.getCpf() != null || clientFind.getEmail() != null) {
@@ -42,7 +42,7 @@ public class CreateClientUseCase  {
             }
         }
 
-        return saveClient.saveClient(client);
+        return saveClientGatewayInterface.saveClient(client);
     }
 
 

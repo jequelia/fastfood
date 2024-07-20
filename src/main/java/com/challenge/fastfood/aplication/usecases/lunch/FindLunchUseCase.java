@@ -1,23 +1,23 @@
 package com.challenge.fastfood.aplication.usecases.lunch;
 
-import com.challenge.fastfood.interfaces.lunch.FindLunch;
+import com.challenge.fastfood.interfaces.lunch.FindLunchGatewayInterface;
 import com.challenge.fastfood.domain.entities.Lunch;
 
 import java.util.List;
 
 public class FindLunchUseCase {
 
-    private final FindLunch findLunch;
+    private final FindLunchGatewayInterface findLunchGatewayInterface;
 
-    public FindLunchUseCase(FindLunch saveLunch) {
-        this.findLunch = saveLunch;
+    public FindLunchUseCase(FindLunchGatewayInterface saveLunch) {
+        this.findLunchGatewayInterface = saveLunch;
     }
 
     public List<Lunch> findLunchs() {
-        return findLunch.findLunchs();
+        return findLunchGatewayInterface.findLunchs();
     }
 
     public Lunch findLunchById(Long id) {
-        return findLunch.findLunchById(id);
+        return findLunchGatewayInterface.findLunchById(id);
     }
 }

@@ -4,7 +4,7 @@ import com.challenge.fastfood.domain.entities.Lunch;
 
 import java.util.List;
 
-public interface FindLunch {
+public interface FindLunchGatewayInterface {
 
     List<Lunch> findLunchs();
     Lunch findLunchById(Long id);

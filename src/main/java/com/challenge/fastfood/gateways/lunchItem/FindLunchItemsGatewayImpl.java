@@ -1,6 +1,6 @@
 package com.challenge.fastfood.gateways.lunchItem;
 
-import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItemsGatewayInterface;
 import com.challenge.fastfood.domain.entities.LunchItem;
 import com.challenge.fastfood.domain.entities.LunchItemType;
 import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
@@ -10,12 +10,12 @@ import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemsRepository;
 import java.util.List;
 
 
-public class FindLunchItemsImpl implements FindLunchItems {
+public class FindLunchItemsGatewayImpl implements FindLunchItemsGatewayInterface {
 
     private final LunchItemsRepository lunchItemsRepository;
     private final LunchItemMapper lunchItemMapper;
 
-    public FindLunchItemsImpl(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+    public FindLunchItemsGatewayImpl(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
         this.lunchItemsRepository = lunchItemsRepository;
         this.lunchItemMapper = lunchItemMapper;
     }

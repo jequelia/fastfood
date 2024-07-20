@@ -1,6 +1,6 @@
 package com.challenge.fastfood.api;
 
-import com.challenge.fastfood.interfaces.payment.PaymentProcess;
+import com.challenge.fastfood.interfaces.payment.PaymentProcessGatewayInterface;
 import com.challenge.fastfood.domain.entities.Payment;
 import com.challenge.fastfood.infra.mapstruct.PaymentMapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PaymentApi {
 
-    private final PaymentProcess paymentAdapterPort;
+    private final PaymentProcessGatewayInterface paymentAdapterPort;
     private final PaymentMapper paymentMapper;
 
     @PostMapping("/process/{lunchId}")

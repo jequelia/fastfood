@@ -1,8 +1,8 @@
 package com.challenge.fastfood.controller;
 
 import com.challenge.fastfood.api.request.LunchRequest;
-import com.challenge.fastfood.interfaces.client.FindClient;
-import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
+import com.challenge.fastfood.interfaces.client.FindClientGatewayInterface;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItemsGatewayInterface;
 import com.challenge.fastfood.aplication.usecases.lunch.CreateLunchUseCase;
 import com.challenge.fastfood.aplication.usecases.lunch.FindLunchUseCase;
 import com.challenge.fastfood.config.exception.ClientException;
@@ -17,18 +17,18 @@ public class LunchController {
 
     private final CreateLunchUseCase createLunchUseCase;
     private final FindLunchUseCase findLunchUseCase;
-    private final FindLunchItems findLunchItemsAdapterPort;
-    private final FindClient findClientAdapterPort;
+    private final FindLunchItemsGatewayInterface findLunchItemsGatewayInterface;
+    private final FindClientGatewayInterface findClientGatewayInterface;
 
     public LunchController(
             CreateLunchUseCase createLunchUseCase,
             FindLunchUseCase findLunchUseCase,
-            FindLunchItems findLunchAdapterPort,
-            FindClient findClientAdapterPort) {
+            FindLunchItemsGatewayInterface findLunch,
+            FindClientGatewayInterface findClientGatewayInterface) {
         this.createLunchUseCase = createLunchUseCase;
         this.findLunchUseCase = findLunchUseCase;
-        this.findLunchItemsAdapterPort = findLunchAdapterPort;
-        this.findClientAdapterPort = findClientAdapterPort;
+        this.findLunchItemsGatewayInterface = findLunch;
+        this.findClientGatewayInterface = findClientGatewayInterface;
     }
 
     public Lunch createLunch(LunchRequest lunchRequest) {
@@ -42,7 +42,7 @@ public class LunchController {
 
         Lunch lunch = new Lunch();
         if (lunchRequest.clientId() != null) {
-            Client client = findClientAdapterPort.findClientById(lunchRequest.clientId());
+            Client client = findClientGatewayInterface.findClientById(lunchRequest.clientId());
             if (client == null) {
                 throw new ClientException("Client id doesn't represent any existing client");
             }
@@ -56,7 +56,7 @@ public class LunchController {
 
     private void mapperLunch(List<Long> lunchRequest, List<LunchItem> lunchItems) {
         for (Long lunchItem : lunchRequest) {
-            LunchItem itemById = findLunchItemsAdapterPort.findLunchItemById(lunchItem);
+            LunchItem itemById = findLunchItemsGatewayInterface.findLunchItemById(lunchItem);
             if (itemById != null){
                 lunchItems.add(itemById);
             }

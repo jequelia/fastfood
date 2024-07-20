@@ -1,15 +1,15 @@
 package com.challenge.fastfood.aplication.usecases.client;
 
-import com.challenge.fastfood.interfaces.client.FindClient;
+import com.challenge.fastfood.interfaces.client.FindClientGatewayInterface;
 import com.challenge.fastfood.config.exception.ClientException;
 import com.challenge.fastfood.domain.entities.Client;
 
 public class FindClientUseCase {
 
-    private final FindClient findClient;
+    private final FindClientGatewayInterface findClientGatewayInterface;
 
-    public FindClientUseCase(FindClient findClient) {
-        this.findClient = findClient;
+    public FindClientUseCase(FindClientGatewayInterface findClientGatewayInterface) {
+        this.findClientGatewayInterface = findClientGatewayInterface;
     }
 
     public Client findClient(String cpf) {
@@ -18,7 +18,7 @@ public class FindClientUseCase {
             throw new ClientException("The CPF is required");
         }
 
-        Client client = findClient.findClient(cpf);
+        Client client = findClientGatewayInterface.findClient(cpf);
 
         if (client == null || client.getCpf() == null || client.getEmail() == null) {
             throw new ClientException("Client not found");

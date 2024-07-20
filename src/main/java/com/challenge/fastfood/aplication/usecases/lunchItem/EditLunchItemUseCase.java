@@ -1,20 +1,20 @@
 package com.challenge.fastfood.aplication.usecases.lunchItem;
 
 
-import com.challenge.fastfood.interfaces.lunchItem.EditLunchItem;
-import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
+import com.challenge.fastfood.interfaces.lunchItem.EditLunchItemGatewayInterface;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItemsGatewayInterface;
 import com.challenge.fastfood.config.exception.LunchItemException;
 import com.challenge.fastfood.domain.entities.LunchItem;
 
 public class EditLunchItemUseCase {
 
     public static final boolean STATUS = false;
-    private final EditLunchItem editLunchItem;
-    private final FindLunchItems findLunchItems;
+    private final EditLunchItemGatewayInterface editLunchItemGatewayInterface;
+    private final FindLunchItemsGatewayInterface findLunchItemsGatewayInterface;
 
-    public EditLunchItemUseCase(EditLunchItem editLunchItem, FindLunchItems findLunchItems) {
-        this.editLunchItem = editLunchItem;
-        this.findLunchItems = findLunchItems;
+    public EditLunchItemUseCase(EditLunchItemGatewayInterface editLunchItemGatewayInterface, FindLunchItemsGatewayInterface findLunchItemsGatewayInterface) {
+        this.editLunchItemGatewayInterface = editLunchItemGatewayInterface;
+        this.findLunchItemsGatewayInterface = findLunchItemsGatewayInterface;
     }
 
     public Boolean editStatusLunchItem(Long idLunchItem) {
@@ -23,13 +23,13 @@ public class EditLunchItemUseCase {
             throw new LunchItemException("idLunchItem and status are required");
         }
 
-        LunchItem lunchItem = findLunchItems.findLunchItemById(idLunchItem);
+        LunchItem lunchItem = findLunchItemsGatewayInterface.findLunchItemById(idLunchItem);
 
         if (lunchItem == null) {
             throw new LunchItemException("Lunch item not found");
         }
 
-        return editLunchItem.editStatusLunchItem(idLunchItem, STATUS);
+        return editLunchItemGatewayInterface.editStatusLunchItem(idLunchItem, STATUS);
     }
 
     public LunchItem editLunchItem(Long idLunchItem, LunchItem lunchItem) {
@@ -38,7 +38,7 @@ public class EditLunchItemUseCase {
             throw new LunchItemException("idLunchItem and lunchItem are required");
         }
 
-        LunchItem lunchItemById = findLunchItems.findLunchItemById(idLunchItem);
+        LunchItem lunchItemById = findLunchItemsGatewayInterface.findLunchItemById(idLunchItem);
 
         if (lunchItemById == null) {
             throw new LunchItemException("Lunch item not found");
@@ -49,7 +49,7 @@ public class EditLunchItemUseCase {
         }
 
 
-        return editLunchItem.editLunchItem(lunchItem, idLunchItem);
+        return editLunchItemGatewayInterface.editLunchItem(lunchItem, idLunchItem);
     }
 
 }

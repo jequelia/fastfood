@@ -6,7 +6,7 @@ import com.challenge.fastfood.domain.entities.LunchItemType;
 
 import java.util.List;
 
-public interface FindLunchItems {
+public interface FindLunchItemsGatewayInterface {
 
     public LunchItem findLunchItemById(Long id);
     List<LunchItem> findLunchItems(LunchItemType type);

@@ -1,12 +1,8 @@
 package com.challenge.fastfood.gateways.lunch;
 
-import com.challenge.fastfood.interfaces.lunch.SaveLunch;
-import com.challenge.fastfood.config.exception.ClientException;
-import com.challenge.fastfood.domain.entities.Client;
+import com.challenge.fastfood.interfaces.lunch.SaveLunchGatewayInterface;
 import com.challenge.fastfood.domain.entities.Lunch;
 import com.challenge.fastfood.domain.entities.LunchItem;
-import com.challenge.fastfood.api.request.LunchRequest;
-import com.challenge.fastfood.infra.mapstruct.ClientMapper;
 import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
 import com.challenge.fastfood.infra.mapstruct.LunchMapper;
 import com.challenge.fastfood.infra.persistence.client.ClientEntity;
@@ -14,25 +10,24 @@ import com.challenge.fastfood.infra.persistence.client.ClientRepository;
 import com.challenge.fastfood.infra.persistence.lunch.LunchEntity;
 import com.challenge.fastfood.infra.persistence.lunch.LunchRepository;
 import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemEntity;
-import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemsRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SaveLunchImpl implements SaveLunch {
+public class SaveLunchGatewayImpl implements SaveLunchGatewayInterface {
 
     private final LunchRepository lunchRepository;
     private final ClientRepository clientRepository;
     private final LunchMapper lunchMapper;
     private final LunchItemMapper lunchItemMapper;
 
-    public SaveLunchImpl(LunchRepository lunchRepository,
+    public SaveLunchGatewayImpl(LunchRepository lunchRepository,
 
-                         ClientRepository clientRepository,
-                         LunchMapper lunchMapper,
-                         LunchItemMapper lunchItemMapper) {
+                                ClientRepository clientRepository,
+                                LunchMapper lunchMapper,
+                                LunchItemMapper lunchItemMapper) {
         this.lunchRepository = lunchRepository;
         this.clientRepository = clientRepository;
         this.lunchMapper = lunchMapper;

@@ -1,6 +1,6 @@
 package com.challenge.fastfood.gateways.lunchItem;
 
-import com.challenge.fastfood.interfaces.lunchItem.EditLunchItem;
+import com.challenge.fastfood.interfaces.lunchItem.EditLunchItemGatewayInterface;
 import com.challenge.fastfood.config.exception.LunchItemException;
 import com.challenge.fastfood.domain.entities.LunchItem;
 import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
@@ -9,12 +9,12 @@ import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemsRepository;
 import jakarta.transaction.Transactional;
 
 
-public class EditLunchItemsImpl implements EditLunchItem {
+public class EditLunchItemsGatewayImpl implements EditLunchItemGatewayInterface {
 
     private final LunchItemsRepository lunchItemsRepository;
     private final LunchItemMapper lunchItemMapper;
 
-    public EditLunchItemsImpl(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+    public EditLunchItemsGatewayImpl(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
         this.lunchItemsRepository = lunchItemsRepository;
         this.lunchItemMapper = lunchItemMapper;
     }

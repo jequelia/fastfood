@@ -1,7 +1,7 @@
 package com.challenge.fastfood.aplication.usecases.lunchItem;
 
 
-import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItemsGatewayInterface;
 import com.challenge.fastfood.config.exception.LunchItemException;
 import com.challenge.fastfood.domain.entities.LunchItem;
 import com.challenge.fastfood.domain.entities.LunchItemType;
@@ -10,14 +10,14 @@ import java.util.List;
 
 public class FindLunchItemsUseCase {
 
-    private final FindLunchItems findLunchItems;
+    private final FindLunchItemsGatewayInterface findLunchItemsGatewayInterface;
 
-    public FindLunchItemsUseCase(FindLunchItems findLunchItems) {
-        this.findLunchItems = findLunchItems;
+    public FindLunchItemsUseCase(FindLunchItemsGatewayInterface findLunchItemsGatewayInterface) {
+        this.findLunchItemsGatewayInterface = findLunchItemsGatewayInterface;
     }
 
     public List<LunchItem> findLunchItems(LunchItemType type) {
-        return findLunchItems.findLunchItems(type);
+        return findLunchItemsGatewayInterface.findLunchItems(type);
     }
 
     public LunchItem findLunchItemByName(String name) {
@@ -26,6 +26,6 @@ public class FindLunchItemsUseCase {
             throw new LunchItemException("Invalid lunch item, name is required");
         }
 
-        return findLunchItems.findLunchItemByName(name);
+        return findLunchItemsGatewayInterface.findLunchItemByName(name);
     }
 }

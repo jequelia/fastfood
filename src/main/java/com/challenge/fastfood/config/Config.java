@@ -5,14 +5,14 @@ import com.challenge.fastfood.controller.ClientController;
 import com.challenge.fastfood.controller.LunchController;
 import com.challenge.fastfood.controller.LunchItemsController;
 import com.challenge.fastfood.controller.PaymentController;
-import com.challenge.fastfood.interfaces.client.FindClient;
-import com.challenge.fastfood.interfaces.client.SaveClient;
-import com.challenge.fastfood.interfaces.lunch.FindLunch;
-import com.challenge.fastfood.interfaces.lunch.SaveLunch;
-import com.challenge.fastfood.interfaces.lunchItem.EditLunchItem;
-import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
-import com.challenge.fastfood.interfaces.lunchItem.SaveLunchItem;
-import com.challenge.fastfood.interfaces.payment.PaymentProcess;
+import com.challenge.fastfood.interfaces.client.FindClientGatewayInterface;
+import com.challenge.fastfood.interfaces.client.SaveClientGatewayInterface;
+import com.challenge.fastfood.interfaces.lunch.FindLunchGatewayInterface;
+import com.challenge.fastfood.interfaces.lunch.SaveLunchGatewayInterface;
+import com.challenge.fastfood.interfaces.lunchItem.EditLunchItemGatewayInterface;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItemsGatewayInterface;
+import com.challenge.fastfood.interfaces.lunchItem.SaveLunchItemGatewayInterface;
+import com.challenge.fastfood.interfaces.payment.PaymentProcessGatewayInterface;
 import com.challenge.fastfood.aplication.usecases.client.CreateClientUseCase;
 import com.challenge.fastfood.aplication.usecases.client.FindClientUseCase;
 import com.challenge.fastfood.aplication.usecases.lunch.CreateLunchUseCase;
@@ -21,13 +21,13 @@ import com.challenge.fastfood.aplication.usecases.lunchItem.CreateLunchItemUseCa
 import com.challenge.fastfood.aplication.usecases.lunchItem.EditLunchItemUseCase;
 import com.challenge.fastfood.aplication.usecases.lunchItem.FindLunchItemsUseCase;
 import com.challenge.fastfood.aplication.usecases.payment.PaymentUseCase;
-import com.challenge.fastfood.gateways.client.FindClientImpl;
-import com.challenge.fastfood.gateways.client.SaveClientImpl;
-import com.challenge.fastfood.gateways.lunch.FindLunchImpl;
-import com.challenge.fastfood.gateways.lunch.SaveLunchImpl;
-import com.challenge.fastfood.gateways.lunchItem.EditLunchItemsImpl;
-import com.challenge.fastfood.gateways.lunchItem.FindLunchItemsImpl;
-import com.challenge.fastfood.gateways.lunchItem.SaveLunchItemImpl;
+import com.challenge.fastfood.gateways.client.FindClientGatewayImpl;
+import com.challenge.fastfood.gateways.client.SaveClientGatewayImpl;
+import com.challenge.fastfood.gateways.lunch.FindLunchGatewayImpl;
+import com.challenge.fastfood.gateways.lunch.SaveLunchGatewayImpl;
+import com.challenge.fastfood.gateways.lunchItem.EditLunchItemsGatewayImpl;
+import com.challenge.fastfood.gateways.lunchItem.FindLunchItemsGatewayImpl;
+import com.challenge.fastfood.gateways.lunchItem.SaveLunchItemGatewayImpl;
 import com.challenge.fastfood.infra.mapstruct.ClientMapper;
 import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
 import com.challenge.fastfood.infra.mapstruct.LunchMapper;
@@ -44,42 +44,42 @@ public class Config {
 //    usecases
 
     @Bean
-    public CreateClientUseCase createClientUseCase(SaveClient saveClientAdapterPort, FindClient findClientAdapterPort) {
-        return new CreateClientUseCase(saveClientAdapterPort, findClientAdapterPort);
+    public CreateClientUseCase createClientUseCase(SaveClientGatewayInterface saveClientGatewayInterface, FindClientGatewayInterface findClientGatewayInterface) {
+        return new CreateClientUseCase(saveClientGatewayInterface, findClientGatewayInterface);
     }
 
     @Bean
-    public FindClientUseCase findClientUseCase(FindClient findClientAdapterPort) {
-        return new FindClientUseCase(findClientAdapterPort);
+    public FindClientUseCase findClientUseCase(FindClientGatewayInterface findClientGatewayInterface) {
+        return new FindClientUseCase(findClientGatewayInterface);
     }
 
     @Bean
-    public CreateLunchItemUseCase createLunchItemUseCase(SaveLunchItem saveLunchItemAdapterPort, FindLunchItems findLunchItemsAdapterPort) {
-        return new CreateLunchItemUseCase(saveLunchItemAdapterPort,findLunchItemsAdapterPort);
+    public CreateLunchItemUseCase createLunchItemUseCase(SaveLunchItemGatewayInterface saveLunchItemGatewayInterface, FindLunchItemsGatewayInterface findLunchItemsGatewayInterface) {
+        return new CreateLunchItemUseCase(saveLunchItemGatewayInterface, findLunchItemsGatewayInterface);
     }
 
     @Bean
-    public FindLunchItemsUseCase findLunchItemsUseCase(FindLunchItems findLunchItemsAdapterPort) {
-        return new FindLunchItemsUseCase(findLunchItemsAdapterPort);
+    public FindLunchItemsUseCase findLunchItemsUseCase(FindLunchItemsGatewayInterface findLunchItemsGatewayInterface) {
+        return new FindLunchItemsUseCase(findLunchItemsGatewayInterface);
     }
 
     @Bean
-    public CreateLunchUseCase createLunchUseCase(SaveLunch saveLunchAdapterPort) {
-        return new CreateLunchUseCase(saveLunchAdapterPort);
+    public CreateLunchUseCase createLunchUseCase(SaveLunchGatewayInterface saveLunchGatewayInterface) {
+        return new CreateLunchUseCase(saveLunchGatewayInterface);
     }
 
     @Bean
-    public FindLunchUseCase findLunchUseCase(FindLunch findLunchAdapterPort) {
-        return new FindLunchUseCase(findLunchAdapterPort);
+    public FindLunchUseCase findLunchUseCase(FindLunchGatewayInterface findLunchGatewayInterface) {
+        return new FindLunchUseCase(findLunchGatewayInterface);
     }
 
     @Bean
-    public EditLunchItemUseCase editLunchItemUseCase(EditLunchItem deleteLunchItemAdapterPort, FindLunchItems findLunchItemsAdapter) {
-        return new EditLunchItemUseCase(deleteLunchItemAdapterPort,findLunchItemsAdapter );
+    public EditLunchItemUseCase editLunchItemUseCase(EditLunchItemGatewayInterface deleteLunchItemAdapterPort, FindLunchItemsGatewayInterface findLunchItemsGatewayInterface) {
+        return new EditLunchItemUseCase(deleteLunchItemAdapterPort, findLunchItemsGatewayInterface);
     }
 
     @Bean
-    public PaymentUseCase paymentUseCase(PaymentProcess paymentAdapterPort) {
+    public PaymentUseCase paymentUseCase(PaymentProcessGatewayInterface paymentAdapterPort) {
         return new PaymentUseCase(paymentAdapterPort);
     }
 
@@ -87,41 +87,41 @@ public class Config {
 
 //    Adapters
     @Bean
-    public FindClientImpl findClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
-        return new FindClientImpl(clientRepository,clientMapper);
+    public FindClientGatewayImpl findClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
+        return new FindClientGatewayImpl(clientRepository,clientMapper);
     }
 
     @Bean
-    public SaveClientImpl saveClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
-        return new SaveClientImpl(clientRepository,clientMapper);
+    public SaveClientGatewayImpl saveClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
+        return new SaveClientGatewayImpl(clientRepository,clientMapper);
     }
 
     @Bean
-    public FindLunchImpl findLunchAdapter(LunchRepository lunchRepository, LunchMapper lunchMapper) {
-        return new FindLunchImpl(lunchRepository,lunchMapper);
+    public FindLunchGatewayImpl findLunchAdapter(LunchRepository lunchRepository, LunchMapper lunchMapper) {
+        return new FindLunchGatewayImpl(lunchRepository,lunchMapper);
     }
 
     @Bean
-    public SaveLunchImpl saveLunchAdapter(LunchRepository lunchRepository,
-                                          ClientRepository clientRepository,
-                                          LunchMapper lunchMapper,
-                                          LunchItemMapper lunchItemMapper) {
-        return new SaveLunchImpl(lunchRepository,clientRepository,lunchMapper,lunchItemMapper);
+    public SaveLunchGatewayImpl saveLunchAdapter(LunchRepository lunchRepository,
+                                                 ClientRepository clientRepository,
+                                                 LunchMapper lunchMapper,
+                                                 LunchItemMapper lunchItemMapper) {
+        return new SaveLunchGatewayImpl(lunchRepository,clientRepository,lunchMapper,lunchItemMapper);
     }
 
     @Bean
-    public EditLunchItemsImpl editLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
-        return new EditLunchItemsImpl(lunchItemsRepository,lunchItemMapper);
+    public EditLunchItemsGatewayImpl editLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+        return new EditLunchItemsGatewayImpl(lunchItemsRepository,lunchItemMapper);
     }
 
     @Bean
-    public FindLunchItemsImpl findLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
-        return new FindLunchItemsImpl(lunchItemsRepository,lunchItemMapper);
+    public FindLunchItemsGatewayImpl findLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+        return new FindLunchItemsGatewayImpl(lunchItemsRepository,lunchItemMapper);
     }
 
     @Bean
-    public SaveLunchItemImpl saveLunchItemAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
-        return new SaveLunchItemImpl(lunchItemsRepository,lunchItemMapper);
+    public SaveLunchItemGatewayImpl saveLunchItemAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+        return new SaveLunchItemGatewayImpl(lunchItemsRepository,lunchItemMapper);
     }
 
     @Bean
@@ -135,9 +135,9 @@ public class Config {
     public LunchController createLunchControllerAdapter(
             CreateLunchUseCase createLunchUseCase,
             FindLunchUseCase findLunchUseCase,
-            FindLunchItems findLunchItemsAdapterPort,
-            FindClient findClientAdapterPort) {
-        return new LunchController(createLunchUseCase, findLunchUseCase,findLunchItemsAdapterPort, findClientAdapterPort);
+            FindLunchItemsGatewayInterface findLunchItemsGatewayInterface,
+            FindClientGatewayInterface findClientGatewayInterface) {
+        return new LunchController(createLunchUseCase, findLunchUseCase, findLunchItemsGatewayInterface, findClientGatewayInterface);
     }
 
     @Bean
