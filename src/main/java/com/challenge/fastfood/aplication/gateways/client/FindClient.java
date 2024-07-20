@@ -5,6 +5,6 @@ import com.challenge.fastfood.domain.entities.Client;
 public interface FindClient {
 
 
-    public Client findClientById(Long id);
+    Client findClientById(Long id);
     Client findClient(String cpf);
 }

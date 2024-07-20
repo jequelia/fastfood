@@ -1,8 +1,8 @@
-package com.challenge.fastfood.infra.controller;
+package com.challenge.fastfood.api;
 
 import com.challenge.fastfood.aplication.gateways.payment.PaymentProcess;
 import com.challenge.fastfood.domain.entities.Payment;
-import com.challenge.fastfood.infra.gateways.mapstruct.PaymentMapper;
+import com.challenge.fastfood.infra.mapstruct.PaymentMapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/payment")
 @Tag(name = "payment", description = "Payment Controller")
 @RequiredArgsConstructor
-public class PaymentController {
+public class PaymentApi {
 
     private final PaymentProcess paymentAdapterPort;
     private final PaymentMapper paymentMapper;

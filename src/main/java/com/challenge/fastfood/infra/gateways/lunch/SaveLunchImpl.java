@@ -5,10 +5,10 @@ import com.challenge.fastfood.config.exception.ClientException;
 import com.challenge.fastfood.domain.entities.Client;
 import com.challenge.fastfood.domain.entities.Lunch;
 import com.challenge.fastfood.domain.entities.LunchItem;
-import com.challenge.fastfood.infra.controller.request.LunchRequest;
-import com.challenge.fastfood.infra.gateways.mapstruct.ClientMapper;
-import com.challenge.fastfood.infra.gateways.mapstruct.LunchItemMapper;
-import com.challenge.fastfood.infra.gateways.mapstruct.LunchMapper;
+import com.challenge.fastfood.api.request.LunchRequest;
+import com.challenge.fastfood.infra.mapstruct.ClientMapper;
+import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
+import com.challenge.fastfood.infra.mapstruct.LunchMapper;
 import com.challenge.fastfood.infra.persistence.client.ClientEntity;
 import com.challenge.fastfood.infra.persistence.client.ClientRepository;
 import com.challenge.fastfood.infra.persistence.lunch.LunchEntity;
@@ -16,14 +16,12 @@ import com.challenge.fastfood.infra.persistence.lunch.LunchRepository;
 import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemEntity;
 import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemsRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SaveLunchAdapter implements SaveLunch {
+public class SaveLunchImpl implements SaveLunch {
 
     private final LunchRepository lunchRepository;
     private final LunchItemsRepository lunchItemsRepository;
@@ -32,12 +30,12 @@ public class SaveLunchAdapter implements SaveLunch {
     private final LunchItemMapper lunchItemMapper;
     private final ClientMapper clientMapper;
 
-    public SaveLunchAdapter(LunchRepository lunchRepository,
-                            LunchItemsRepository lunchItemsRepository,
-                            ClientRepository clientRepository,
-                            LunchMapper lunchMapper,
-                            LunchItemMapper lunchItemMapper,
-                            ClientMapper clientMapper) {
+    public SaveLunchImpl(LunchRepository lunchRepository,
+                         LunchItemsRepository lunchItemsRepository,
+                         ClientRepository clientRepository,
+                         LunchMapper lunchMapper,
+                         LunchItemMapper lunchItemMapper,
+                         ClientMapper clientMapper) {
         this.lunchRepository = lunchRepository;
         this.lunchItemsRepository = lunchItemsRepository;
         this.clientRepository = clientRepository;

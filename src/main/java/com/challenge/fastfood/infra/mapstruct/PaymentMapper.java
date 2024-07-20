@@ -1,7 +1,5 @@
-package com.challenge.fastfood.infra.gateways.mapstruct;
+package com.challenge.fastfood.infra.mapstruct;
 
-import com.challenge.fastfood.domain.entities.Payment;
-import com.challenge.fastfood.infra.controller.request.PaymentRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

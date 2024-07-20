@@ -1,4 +1,4 @@
-package com.challenge.fastfood.infra.controller.request;
+package com.challenge.fastfood.api.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

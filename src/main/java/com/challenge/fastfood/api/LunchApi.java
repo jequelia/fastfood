@@ -1,12 +1,11 @@
-package com.challenge.fastfood.infra.controller;
+package com.challenge.fastfood.api;
 
 import com.challenge.fastfood.aplication.usecases.lunch.CreateLunchUseCase;
 import com.challenge.fastfood.aplication.usecases.lunch.FindLunchUseCase;
 import com.challenge.fastfood.domain.entities.Lunch;
-import com.challenge.fastfood.infra.controller.request.LunchRequest;
-import com.challenge.fastfood.infra.controller.response.LunchResponse;
-import com.challenge.fastfood.infra.gateways.mapstruct.LunchMapper;
-import com.challenge.fastfood.infra.persistence.lunch.LunchRepository;
+import com.challenge.fastfood.api.request.LunchRequest;
+import com.challenge.fastfood.api.response.LunchResponse;
+import com.challenge.fastfood.infra.mapstruct.LunchMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ import java.util.List;
 @RequestMapping("/lunch")
 @Tag(name = "Lunch", description = "Lunch Controller")
 @RequiredArgsConstructor
-public class LunchController {
+public class LunchApi {
 
     private final LunchMapper lunchMapper;
 

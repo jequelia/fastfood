@@ -1,4 +1,4 @@
-package com.challenge.fastfood.infra.controller.request;
+package com.challenge.fastfood.api.request;
 
 import com.challenge.fastfood.config.validation.EnumValue;
 import com.challenge.fastfood.domain.entities.LunchItemType;

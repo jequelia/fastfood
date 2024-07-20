@@ -1,8 +1,8 @@
-package com.challenge.fastfood.infra.gateways.mapstruct;
+package com.challenge.fastfood.infra.mapstruct;
 
 import com.challenge.fastfood.domain.entities.Lunch;
-import com.challenge.fastfood.infra.controller.request.LunchRequest;
-import com.challenge.fastfood.infra.controller.response.LunchResponse;
+import com.challenge.fastfood.api.request.LunchRequest;
+import com.challenge.fastfood.api.response.LunchResponse;
 import com.challenge.fastfood.infra.persistence.lunch.LunchEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

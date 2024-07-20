@@ -2,18 +2,16 @@ package com.challenge.fastfood.infra.gateways.client;
 
 import com.challenge.fastfood.aplication.gateways.client.FindClient;
 import com.challenge.fastfood.domain.entities.Client;
-import com.challenge.fastfood.infra.gateways.mapstruct.ClientMapper;
+import com.challenge.fastfood.infra.mapstruct.ClientMapper;
 import com.challenge.fastfood.infra.persistence.client.ClientEntity;
 import com.challenge.fastfood.infra.persistence.client.ClientRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-public class FindClientAdapter implements FindClient {
+public class FindClientImpl implements FindClient {
 
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
 
-    public FindClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
+    public FindClientImpl(ClientRepository clientRepository, ClientMapper clientMapper) {
         this.clientRepository = clientRepository;
         this.clientMapper = clientMapper;
     }

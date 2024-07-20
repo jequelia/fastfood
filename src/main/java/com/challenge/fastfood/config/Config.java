@@ -17,16 +17,16 @@ import com.challenge.fastfood.aplication.usecases.lunchItem.CreateLunchItemUseCa
 import com.challenge.fastfood.aplication.usecases.lunchItem.EditLunchItemUseCase;
 import com.challenge.fastfood.aplication.usecases.lunchItem.FindLunchItemsUseCase;
 import com.challenge.fastfood.aplication.usecases.payment.PaymentUseCase;
-import com.challenge.fastfood.infra.gateways.client.FindClientAdapter;
-import com.challenge.fastfood.infra.gateways.client.SaveClientAdapter;
-import com.challenge.fastfood.infra.gateways.lunch.FindLunchAdapter;
-import com.challenge.fastfood.infra.gateways.lunch.SaveLunchAdapter;
-import com.challenge.fastfood.infra.gateways.lunchItem.EditLunchItemsAdapter;
-import com.challenge.fastfood.infra.gateways.lunchItem.FindLunchItemsAdapter;
-import com.challenge.fastfood.infra.gateways.lunchItem.SaveLunchItemAdapter;
-import com.challenge.fastfood.infra.gateways.mapstruct.ClientMapper;
-import com.challenge.fastfood.infra.gateways.mapstruct.LunchItemMapper;
-import com.challenge.fastfood.infra.gateways.mapstruct.LunchMapper;
+import com.challenge.fastfood.infra.gateways.client.FindClientImpl;
+import com.challenge.fastfood.infra.gateways.client.SaveClientImpl;
+import com.challenge.fastfood.infra.gateways.lunch.FindLunchImpl;
+import com.challenge.fastfood.infra.gateways.lunch.SaveLunchImpl;
+import com.challenge.fastfood.infra.gateways.lunchItem.EditLunchItemsImpl;
+import com.challenge.fastfood.infra.gateways.lunchItem.FindLunchItemsImpl;
+import com.challenge.fastfood.infra.gateways.lunchItem.SaveLunchItemImpl;
+import com.challenge.fastfood.infra.mapstruct.ClientMapper;
+import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
+import com.challenge.fastfood.infra.mapstruct.LunchMapper;
 import com.challenge.fastfood.infra.persistence.client.ClientRepository;
 import com.challenge.fastfood.infra.persistence.lunch.LunchRepository;
 import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemsRepository;
@@ -83,43 +83,43 @@ public class Config {
 
 //    Adapters
     @Bean
-    public FindClientAdapter findClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
-        return new FindClientAdapter(clientRepository,clientMapper);
+    public FindClientImpl findClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
+        return new FindClientImpl(clientRepository,clientMapper);
     }
 
     @Bean
-    public SaveClientAdapter saveClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
-        return new SaveClientAdapter(clientRepository,clientMapper);
+    public SaveClientImpl saveClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
+        return new SaveClientImpl(clientRepository,clientMapper);
     }
 
     @Bean
-    public FindLunchAdapter findLunchAdapter(LunchRepository lunchRepository, LunchMapper lunchMapper) {
-        return new FindLunchAdapter(lunchRepository,lunchMapper);
+    public FindLunchImpl findLunchAdapter(LunchRepository lunchRepository, LunchMapper lunchMapper) {
+        return new FindLunchImpl(lunchRepository,lunchMapper);
     }
 
     @Bean
-    public SaveLunchAdapter saveLunchAdapter(LunchRepository lunchRepository,
-                                             LunchItemsRepository lunchItemsRepository,
-                                             ClientRepository clientRepository,
-                                             LunchMapper lunchMapper,
-                                             LunchItemMapper lunchItemMapper,
-                                             ClientMapper clientMapper) {
-        return new SaveLunchAdapter(lunchRepository,lunchItemsRepository,clientRepository,lunchMapper,lunchItemMapper,clientMapper);
+    public SaveLunchImpl saveLunchAdapter(LunchRepository lunchRepository,
+                                          LunchItemsRepository lunchItemsRepository,
+                                          ClientRepository clientRepository,
+                                          LunchMapper lunchMapper,
+                                          LunchItemMapper lunchItemMapper,
+                                          ClientMapper clientMapper) {
+        return new SaveLunchImpl(lunchRepository,lunchItemsRepository,clientRepository,lunchMapper,lunchItemMapper,clientMapper);
     }
 
     @Bean
-    public EditLunchItemsAdapter editLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
-        return new EditLunchItemsAdapter(lunchItemsRepository,lunchItemMapper);
+    public EditLunchItemsImpl editLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+        return new EditLunchItemsImpl(lunchItemsRepository,lunchItemMapper);
     }
 
     @Bean
-    public FindLunchItemsAdapter findLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
-        return new FindLunchItemsAdapter(lunchItemsRepository,lunchItemMapper);
+    public FindLunchItemsImpl findLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+        return new FindLunchItemsImpl(lunchItemsRepository,lunchItemMapper);
     }
 
     @Bean
-    public SaveLunchItemAdapter saveLunchItemAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
-        return new SaveLunchItemAdapter(lunchItemsRepository,lunchItemMapper);
+    public SaveLunchItemImpl saveLunchItemAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+        return new SaveLunchItemImpl(lunchItemsRepository,lunchItemMapper);
     }
 
 

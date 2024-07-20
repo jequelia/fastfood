@@ -5,7 +5,7 @@ import com.challenge.fastfood.domain.entities.Payment;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PaymentAdapter implements PaymentProcess {
+public class PaymentImpl implements PaymentProcess {
 
     @Override
     public Payment processPayment(Payment payment) {

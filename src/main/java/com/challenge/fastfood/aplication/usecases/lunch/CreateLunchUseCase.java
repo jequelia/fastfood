@@ -2,7 +2,7 @@ package com.challenge.fastfood.aplication.usecases.lunch;
 
 import com.challenge.fastfood.aplication.gateways.lunch.SaveLunch;
 import com.challenge.fastfood.domain.entities.Lunch;
-import com.challenge.fastfood.infra.controller.request.LunchRequest;
+import com.challenge.fastfood.api.request.LunchRequest;
 
 public class CreateLunchUseCase {
 

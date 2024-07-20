@@ -1,11 +1,11 @@
-package com.challenge.fastfood.infra.controller;
+package com.challenge.fastfood.api;
 
 import com.challenge.fastfood.aplication.usecases.client.CreateClientUseCase;
 import com.challenge.fastfood.aplication.usecases.client.FindClientUseCase;
 import com.challenge.fastfood.domain.entities.Client;
-import com.challenge.fastfood.infra.controller.request.ClientRequest;
-import com.challenge.fastfood.infra.controller.response.ClientResponse;
-import com.challenge.fastfood.infra.gateways.mapstruct.ClientMapper;
+import com.challenge.fastfood.api.request.ClientRequest;
+import com.challenge.fastfood.api.response.ClientResponse;
+import com.challenge.fastfood.infra.mapstruct.ClientMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/client")
 @Tag(name = "Client", description = "Client Controller")
 @RequiredArgsConstructor
-public class ClientController {
+public class ClientApi {
 
     private final ClientMapper clientMapper;
 

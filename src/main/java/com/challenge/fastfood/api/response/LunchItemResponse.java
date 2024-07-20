@@ -1,4 +1,4 @@
-package com.challenge.fastfood.infra.controller.response;
+package com.challenge.fastfood.api.response;
 
 import com.challenge.fastfood.domain.entities.LunchItemType;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,9 +1,9 @@
-package com.challenge.fastfood.infra.gateways.mapstruct;
+package com.challenge.fastfood.infra.mapstruct;
 
 
 import com.challenge.fastfood.domain.entities.Client;
-import com.challenge.fastfood.infra.controller.request.ClientRequest;
-import com.challenge.fastfood.infra.controller.response.ClientResponse;
+import com.challenge.fastfood.api.request.ClientRequest;
+import com.challenge.fastfood.api.response.ClientResponse;
 import com.challenge.fastfood.infra.persistence.client.ClientEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

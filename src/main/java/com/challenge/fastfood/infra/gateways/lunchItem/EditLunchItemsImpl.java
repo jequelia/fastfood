@@ -3,20 +3,18 @@ package com.challenge.fastfood.infra.gateways.lunchItem;
 import com.challenge.fastfood.aplication.gateways.lunchItem.EditLunchItem;
 import com.challenge.fastfood.config.exception.LunchItemException;
 import com.challenge.fastfood.domain.entities.LunchItem;
-import com.challenge.fastfood.infra.gateways.mapstruct.LunchItemMapper;
+import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
 import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemEntity;
 import com.challenge.fastfood.infra.persistence.lunchItem.LunchItemsRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 
-public class EditLunchItemsAdapter implements EditLunchItem {
+public class EditLunchItemsImpl implements EditLunchItem {
 
     private final LunchItemsRepository lunchItemsRepository;
     private final LunchItemMapper lunchItemMapper;
 
-    public EditLunchItemsAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
+    public EditLunchItemsImpl(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
         this.lunchItemsRepository = lunchItemsRepository;
         this.lunchItemMapper = lunchItemMapper;
     }
