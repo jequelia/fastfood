@@ -1,4 +1,4 @@
-package com.challenge.fastfood.aplication.gateways.client;
+package com.challenge.fastfood.interfaces.client;
 
 import com.challenge.fastfood.domain.entities.Client;
 

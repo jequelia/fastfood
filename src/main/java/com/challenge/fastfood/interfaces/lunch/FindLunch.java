@@ -1,4 +1,4 @@
-package com.challenge.fastfood.aplication.gateways.lunch;
+package com.challenge.fastfood.interfaces.lunch;
 
 import com.challenge.fastfood.domain.entities.Lunch;
 

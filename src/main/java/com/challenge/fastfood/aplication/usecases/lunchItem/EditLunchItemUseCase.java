@@ -1,8 +1,8 @@
 package com.challenge.fastfood.aplication.usecases.lunchItem;
 
 
-import com.challenge.fastfood.aplication.gateways.lunchItem.EditLunchItem;
-import com.challenge.fastfood.aplication.gateways.lunchItem.FindLunchItems;
+import com.challenge.fastfood.interfaces.lunchItem.EditLunchItem;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
 import com.challenge.fastfood.config.exception.LunchItemException;
 import com.challenge.fastfood.domain.entities.LunchItem;
 

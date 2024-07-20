@@ -1,6 +1,6 @@
-package com.challenge.fastfood.infra.gateways.lunchItem;
+package com.challenge.fastfood.gateways.lunchItem;
 
-import com.challenge.fastfood.aplication.gateways.lunchItem.FindLunchItems;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
 import com.challenge.fastfood.domain.entities.LunchItem;
 import com.challenge.fastfood.domain.entities.LunchItemType;
 import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;

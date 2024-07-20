@@ -1,6 +1,6 @@
 package com.challenge.fastfood.aplication.usecases.client;
 
-import com.challenge.fastfood.aplication.gateways.client.FindClient;
+import com.challenge.fastfood.interfaces.client.FindClient;
 import com.challenge.fastfood.config.exception.ClientException;
 import com.challenge.fastfood.domain.entities.Client;
 

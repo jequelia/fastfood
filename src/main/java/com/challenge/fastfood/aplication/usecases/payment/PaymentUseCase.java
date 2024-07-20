@@ -1,7 +1,7 @@
 package com.challenge.fastfood.aplication.usecases.payment;
 
 
-import com.challenge.fastfood.aplication.gateways.payment.PaymentProcess;
+import com.challenge.fastfood.interfaces.payment.PaymentProcess;
 import com.challenge.fastfood.domain.entities.Payment;
 
 public class PaymentUseCase {

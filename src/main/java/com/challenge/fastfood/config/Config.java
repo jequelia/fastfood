@@ -1,14 +1,18 @@
 package com.challenge.fastfood.config;
 
 
-import com.challenge.fastfood.aplication.gateways.client.FindClient;
-import com.challenge.fastfood.aplication.gateways.client.SaveClient;
-import com.challenge.fastfood.aplication.gateways.lunch.FindLunch;
-import com.challenge.fastfood.aplication.gateways.lunch.SaveLunch;
-import com.challenge.fastfood.aplication.gateways.lunchItem.EditLunchItem;
-import com.challenge.fastfood.aplication.gateways.lunchItem.FindLunchItems;
-import com.challenge.fastfood.aplication.gateways.lunchItem.SaveLunchItem;
-import com.challenge.fastfood.aplication.gateways.payment.PaymentProcess;
+import com.challenge.fastfood.controller.ClientController;
+import com.challenge.fastfood.controller.LunchController;
+import com.challenge.fastfood.controller.LunchItemsController;
+import com.challenge.fastfood.controller.PaymentController;
+import com.challenge.fastfood.interfaces.client.FindClient;
+import com.challenge.fastfood.interfaces.client.SaveClient;
+import com.challenge.fastfood.interfaces.lunch.FindLunch;
+import com.challenge.fastfood.interfaces.lunch.SaveLunch;
+import com.challenge.fastfood.interfaces.lunchItem.EditLunchItem;
+import com.challenge.fastfood.interfaces.lunchItem.FindLunchItems;
+import com.challenge.fastfood.interfaces.lunchItem.SaveLunchItem;
+import com.challenge.fastfood.interfaces.payment.PaymentProcess;
 import com.challenge.fastfood.aplication.usecases.client.CreateClientUseCase;
 import com.challenge.fastfood.aplication.usecases.client.FindClientUseCase;
 import com.challenge.fastfood.aplication.usecases.lunch.CreateLunchUseCase;
@@ -17,13 +21,13 @@ import com.challenge.fastfood.aplication.usecases.lunchItem.CreateLunchItemUseCa
 import com.challenge.fastfood.aplication.usecases.lunchItem.EditLunchItemUseCase;
 import com.challenge.fastfood.aplication.usecases.lunchItem.FindLunchItemsUseCase;
 import com.challenge.fastfood.aplication.usecases.payment.PaymentUseCase;
-import com.challenge.fastfood.infra.gateways.client.FindClientImpl;
-import com.challenge.fastfood.infra.gateways.client.SaveClientImpl;
-import com.challenge.fastfood.infra.gateways.lunch.FindLunchImpl;
-import com.challenge.fastfood.infra.gateways.lunch.SaveLunchImpl;
-import com.challenge.fastfood.infra.gateways.lunchItem.EditLunchItemsImpl;
-import com.challenge.fastfood.infra.gateways.lunchItem.FindLunchItemsImpl;
-import com.challenge.fastfood.infra.gateways.lunchItem.SaveLunchItemImpl;
+import com.challenge.fastfood.gateways.client.FindClientImpl;
+import com.challenge.fastfood.gateways.client.SaveClientImpl;
+import com.challenge.fastfood.gateways.lunch.FindLunchImpl;
+import com.challenge.fastfood.gateways.lunch.SaveLunchImpl;
+import com.challenge.fastfood.gateways.lunchItem.EditLunchItemsImpl;
+import com.challenge.fastfood.gateways.lunchItem.FindLunchItemsImpl;
+import com.challenge.fastfood.gateways.lunchItem.SaveLunchItemImpl;
 import com.challenge.fastfood.infra.mapstruct.ClientMapper;
 import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
 import com.challenge.fastfood.infra.mapstruct.LunchMapper;
@@ -99,12 +103,10 @@ public class Config {
 
     @Bean
     public SaveLunchImpl saveLunchAdapter(LunchRepository lunchRepository,
-                                          LunchItemsRepository lunchItemsRepository,
                                           ClientRepository clientRepository,
                                           LunchMapper lunchMapper,
-                                          LunchItemMapper lunchItemMapper,
-                                          ClientMapper clientMapper) {
-        return new SaveLunchImpl(lunchRepository,lunchItemsRepository,clientRepository,lunchMapper,lunchItemMapper,clientMapper);
+                                          LunchItemMapper lunchItemMapper) {
+        return new SaveLunchImpl(lunchRepository,clientRepository,lunchMapper,lunchItemMapper);
     }
 
     @Bean
@@ -120,6 +122,35 @@ public class Config {
     @Bean
     public SaveLunchItemImpl saveLunchItemAdapter(LunchItemsRepository lunchItemsRepository, LunchItemMapper lunchItemMapper) {
         return new SaveLunchItemImpl(lunchItemsRepository,lunchItemMapper);
+    }
+
+    @Bean
+    public ClientController createClientControllerAdapter(
+            CreateClientUseCase clientUseCase,
+            FindClientUseCase findClientUseCase) {
+        return new ClientController(clientUseCase, findClientUseCase);
+    }
+
+    @Bean
+    public LunchController createLunchControllerAdapter(
+            CreateLunchUseCase createLunchUseCase,
+            FindLunchUseCase findLunchUseCase,
+            FindLunchItems findLunchItemsAdapterPort,
+            FindClient findClientAdapterPort) {
+        return new LunchController(createLunchUseCase, findLunchUseCase,findLunchItemsAdapterPort, findClientAdapterPort);
+    }
+
+    @Bean
+    public LunchItemsController createLunchItemsControllerAdapter(
+            CreateLunchItemUseCase createLunchItemUseCase,
+            EditLunchItemUseCase editLunchItemUseCase,
+            FindLunchItemsUseCase findLunchItemsUseCase) {
+        return new LunchItemsController(createLunchItemUseCase, editLunchItemUseCase, findLunchItemsUseCase);
+    }
+
+    @Bean
+    public PaymentController createPaymentControllerAdapter(PaymentUseCase paymentUseCase) {
+        return new PaymentController(paymentUseCase);
     }
 
 

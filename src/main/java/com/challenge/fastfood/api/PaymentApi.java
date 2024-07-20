@@ -1,6 +1,6 @@
 package com.challenge.fastfood.api;
 
-import com.challenge.fastfood.aplication.gateways.payment.PaymentProcess;
+import com.challenge.fastfood.interfaces.payment.PaymentProcess;
 import com.challenge.fastfood.domain.entities.Payment;
 import com.challenge.fastfood.infra.mapstruct.PaymentMapper;
 import io.swagger.v3.oas.annotations.tags.Tag;

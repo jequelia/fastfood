@@ -1,6 +1,6 @@
-package com.challenge.fastfood.infra.gateways.client;
+package com.challenge.fastfood.gateways.client;
 
-import com.challenge.fastfood.aplication.gateways.client.FindClient;
+import com.challenge.fastfood.interfaces.client.FindClient;
 import com.challenge.fastfood.domain.entities.Client;
 import com.challenge.fastfood.infra.mapstruct.ClientMapper;
 import com.challenge.fastfood.infra.persistence.client.ClientEntity;

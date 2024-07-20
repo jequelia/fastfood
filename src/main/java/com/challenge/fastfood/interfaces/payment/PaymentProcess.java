@@ -1,4 +1,4 @@
-package com.challenge.fastfood.aplication.gateways.payment;
+package com.challenge.fastfood.interfaces.payment;
 
 
 import com.challenge.fastfood.domain.entities.Payment;

@@ -1,6 +1,6 @@
 package com.challenge.fastfood.aplication.usecases.lunch;
 
-import com.challenge.fastfood.aplication.gateways.lunch.FindLunch;
+import com.challenge.fastfood.interfaces.lunch.FindLunch;
 import com.challenge.fastfood.domain.entities.Lunch;
 
 import java.util.List;

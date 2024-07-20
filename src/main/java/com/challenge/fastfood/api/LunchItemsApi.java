@@ -1,8 +1,6 @@
 package com.challenge.fastfood.api;
 
-import com.challenge.fastfood.aplication.usecases.lunchItem.CreateLunchItemUseCase;
-import com.challenge.fastfood.aplication.usecases.lunchItem.EditLunchItemUseCase;
-import com.challenge.fastfood.aplication.usecases.lunchItem.FindLunchItemsUseCase;
+import com.challenge.fastfood.controller.LunchItemsController;
 import com.challenge.fastfood.domain.entities.LunchItem;
 import com.challenge.fastfood.domain.entities.LunchItemType;
 import com.challenge.fastfood.api.request.LunchItemRequest;
@@ -23,14 +21,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LunchItemsApi {
 
+
+    private final LunchItemsController lunchItemsController;
     private final LunchItemMapper lunchItemMapper;
-
-    private final CreateLunchItemUseCase createLunchItemUseCase;
-
-    private final EditLunchItemUseCase editLunchItemUseCase;
-
-    private final FindLunchItemsUseCase findLunchItemsUseCase;
-
 
     @GetMapping
     @Operation(summary = "Get available lunch items", description = "Get available lunch items")
@@ -41,21 +34,21 @@ public class LunchItemsApi {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(List.of());
         }
-        List<LunchItem> lunchItemList = findLunchItemsUseCase.findLunchItems(lunchItemType);
+        List<LunchItem> lunchItemList = lunchItemsController.findLunchItems(lunchItemType);
         return ResponseEntity.ok(lunchItemMapper.lunchItemToLunchItemResponse(lunchItemList));
     }
 
     @PostMapping
     @Operation(summary = "Create a lunch item", description = "Create a lunch item")
     public ResponseEntity<LunchItemResponse> createLunchItem(@Valid @RequestBody LunchItemRequest lunchItemRequest) {
-        LunchItem lunchItem = createLunchItemUseCase.createLunchItem(lunchItemMapper.lunchItemRequestToLunchItem(lunchItemRequest));
+        LunchItem lunchItem = lunchItemsController.createLunchItem(lunchItemMapper.lunchItemRequestToLunchItem(lunchItemRequest));
         return ResponseEntity.ok(lunchItemMapper.lunchItemToLunchItemResponse(lunchItem));
     }
 
     @DeleteMapping("/{lunchId}")
     @Operation(summary = "Delete a lunch order", description = "Delete a lunch order")
     public ResponseEntity<Boolean> deleteLunch(@PathVariable Long lunchId){
-        Boolean deleteLunchItem = editLunchItemUseCase.editStatusLunchItem(lunchId);
+        Boolean deleteLunchItem = lunchItemsController.editStatusLunchItem(lunchId);
         return ResponseEntity.ok(deleteLunchItem);
     }
 
@@ -63,7 +56,7 @@ public class LunchItemsApi {
     @Operation(summary = "Edit a lunch order", description = "Edit a lunch order")
     public ResponseEntity<LunchItemResponse> editLunchItem(@PathVariable Long lunchId, @Valid @RequestBody LunchItemRequest lunchItemRequest) {
         LunchItem toLunchItem = lunchItemMapper.lunchItemRequestToLunchItem(lunchItemRequest);
-        LunchItem lunchItem = editLunchItemUseCase.editLunchItem(lunchId, toLunchItem);
+        LunchItem lunchItem = lunchItemsController.editLunchItem(lunchId, toLunchItem);
         return ResponseEntity.ok(lunchItemMapper.lunchItemToLunchItemResponse(lunchItem));
     }
 }

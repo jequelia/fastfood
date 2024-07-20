@@ -1,6 +1,6 @@
-package com.challenge.fastfood.infra.gateways.lunch;
+package com.challenge.fastfood.gateways.lunch;
 
-import com.challenge.fastfood.aplication.gateways.lunch.SaveLunch;
+import com.challenge.fastfood.interfaces.lunch.SaveLunch;
 import com.challenge.fastfood.config.exception.ClientException;
 import com.challenge.fastfood.domain.entities.Client;
 import com.challenge.fastfood.domain.entities.Lunch;
@@ -24,24 +24,19 @@ import java.util.List;
 public class SaveLunchImpl implements SaveLunch {
 
     private final LunchRepository lunchRepository;
-    private final LunchItemsRepository lunchItemsRepository;
     private final ClientRepository clientRepository;
     private final LunchMapper lunchMapper;
     private final LunchItemMapper lunchItemMapper;
-    private final ClientMapper clientMapper;
 
     public SaveLunchImpl(LunchRepository lunchRepository,
-                         LunchItemsRepository lunchItemsRepository,
+
                          ClientRepository clientRepository,
                          LunchMapper lunchMapper,
-                         LunchItemMapper lunchItemMapper,
-                         ClientMapper clientMapper) {
+                         LunchItemMapper lunchItemMapper) {
         this.lunchRepository = lunchRepository;
-        this.lunchItemsRepository = lunchItemsRepository;
         this.clientRepository = clientRepository;
         this.lunchMapper = lunchMapper;
         this.lunchItemMapper = lunchItemMapper;
-        this.clientMapper = clientMapper;
     }
 
     @Override
@@ -79,42 +74,6 @@ public class SaveLunchImpl implements SaveLunch {
         }
         return clientEntity;
     }
-
-    @Override
-    public Lunch createLunch(LunchRequest lunchRequest) {
-
-        List<LunchItem> lunchItems = new ArrayList<>();
-
-        mapperLunch(lunchRequest.drink(), lunchItems);
-        mapperLunch(lunchRequest.snack(), lunchItems);
-        mapperLunch(lunchRequest.accompaniment(), lunchItems);
-        mapperLunch(lunchRequest.dessert(), lunchItems);
-
-        Lunch lunch = new Lunch();
-        if (lunchRequest.clientId() != null) {
-            ClientEntity client = clientRepository.findById(lunchRequest.clientId()).orElse(null);
-            Client toClient = clientMapper.clientEntityToClient(client);
-            if (toClient == null) {
-                throw new ClientException("Client id doesn't represent any existing client");
-            }
-            toClient.setId(lunchRequest.clientId());
-            lunch.setClient(toClient);
-        }
-        lunch.setLunchItems(lunchItems);
-
-        return lunch;
-    }
-
-    private void mapperLunch(List<Long> lunchRequest, List<LunchItem> lunchItems) {
-        for (Long lunchItem : lunchRequest) {
-            LunchItemEntity itemById = lunchItemsRepository.findById(lunchItem).orElse(null);
-            LunchItem toLunchItem = lunchItemMapper.lunchItemEntityToLunchItem(itemById);
-            if (toLunchItem != null){
-                lunchItems.add(toLunchItem);
-            }
-        }
-    }
-
 
 
 

@@ -1,6 +1,6 @@
-package com.challenge.fastfood.infra.gateways.payment;
+package com.challenge.fastfood.gateways.payment;
 
-import com.challenge.fastfood.aplication.gateways.payment.PaymentProcess;
+import com.challenge.fastfood.interfaces.payment.PaymentProcess;
 import com.challenge.fastfood.domain.entities.Payment;
 import org.springframework.stereotype.Service;
 
