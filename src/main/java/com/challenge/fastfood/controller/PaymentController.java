@@ -1,6 +1,6 @@
 package com.challenge.fastfood.controller;
 
-import com.challenge.fastfood.aplication.usecases.payment.PaymentUseCase;
+import com.challenge.fastfood.domain.usecases.payment.PaymentUseCase;
 import com.challenge.fastfood.domain.entities.Payment;
 
 public class PaymentController {

@@ -1,4 +1,4 @@
-package com.challenge.fastfood.aplication.usecases.lunchItem;
+package com.challenge.fastfood.domain.usecases.lunchItem;
 
 import com.challenge.fastfood.interfaces.lunchItem.FindLunchItemsGatewayInterface;
 import com.challenge.fastfood.interfaces.lunchItem.SaveLunchItemGatewayInterface;

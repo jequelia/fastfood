@@ -2,8 +2,8 @@ package com.challenge.fastfood.controller;
 
 import com.challenge.fastfood.api.request.ClientRequest;
 import com.challenge.fastfood.api.response.ClientResponse;
-import com.challenge.fastfood.aplication.usecases.client.CreateClientUseCase;
-import com.challenge.fastfood.aplication.usecases.client.FindClientUseCase;
+import com.challenge.fastfood.domain.usecases.client.CreateClientUseCase;
+import com.challenge.fastfood.domain.usecases.client.FindClientUseCase;
 import com.challenge.fastfood.domain.entities.Client;
 import com.challenge.fastfood.infra.mapstruct.ClientMapper;
 

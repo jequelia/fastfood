@@ -2,14 +2,13 @@ package com.challenge.fastfood.controller;
 
 import com.challenge.fastfood.api.request.LunchItemRequest;
 import com.challenge.fastfood.api.response.LunchItemResponse;
-import com.challenge.fastfood.aplication.usecases.lunchItem.CreateLunchItemUseCase;
-import com.challenge.fastfood.aplication.usecases.lunchItem.EditLunchItemUseCase;
-import com.challenge.fastfood.aplication.usecases.lunchItem.FindLunchItemsUseCase;
+import com.challenge.fastfood.domain.usecases.lunchItem.CreateLunchItemUseCase;
+import com.challenge.fastfood.domain.usecases.lunchItem.EditLunchItemUseCase;
+import com.challenge.fastfood.domain.usecases.lunchItem.FindLunchItemsUseCase;
 import com.challenge.fastfood.config.exception.LunchItemException;
 import com.challenge.fastfood.domain.entities.LunchItem;
 import com.challenge.fastfood.domain.entities.LunchItemType;
 import com.challenge.fastfood.infra.mapstruct.LunchItemMapper;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

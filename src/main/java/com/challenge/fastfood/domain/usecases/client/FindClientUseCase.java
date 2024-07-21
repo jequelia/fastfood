@@ -1,4 +1,4 @@
-package com.challenge.fastfood.aplication.usecases.client;
+package com.challenge.fastfood.domain.usecases.client;
 
 import com.challenge.fastfood.interfaces.client.FindClientGatewayInterface;
 import com.challenge.fastfood.config.exception.ClientException;

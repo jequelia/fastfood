@@ -1,4 +1,4 @@
-package com.challenge.fastfood.aplication.usecases.payment;
+package com.challenge.fastfood.domain.usecases.payment;
 
 
 import com.challenge.fastfood.interfaces.payment.PaymentProcessGatewayInterface;
