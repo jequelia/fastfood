@@ -1,27 +1,37 @@
 package com.challenge.fastfood.controller;
 
+import com.challenge.fastfood.api.request.ClientRequest;
+import com.challenge.fastfood.api.response.ClientResponse;
 import com.challenge.fastfood.aplication.usecases.client.CreateClientUseCase;
 import com.challenge.fastfood.aplication.usecases.client.FindClientUseCase;
 import com.challenge.fastfood.domain.entities.Client;
+import com.challenge.fastfood.infra.mapstruct.ClientMapper;
 
 public class ClientController {
 
     private final CreateClientUseCase createClientUseCase;
     private final FindClientUseCase findClientUseCase;
+    private final ClientMapper clientMapper;
+
 
     public ClientController(
             CreateClientUseCase createClientUseCase,
-            FindClientUseCase findClientUseCase) {
+            FindClientUseCase findClientUseCase, ClientMapper clientMapper) {
         this.createClientUseCase = createClientUseCase;
         this.findClientUseCase = findClientUseCase;
-
+        this.clientMapper = clientMapper;
     }
 
-    public Client createClient(Client client) {
-        return createClientUseCase.createClient(client);
+    public ClientResponse createClient(ClientRequest clientRequest) {
+        Client toClient = clientMapper.clientRequestToClient(clientRequest);
+        Client client = createClientUseCase.createClient(toClient);
+        return  clientMapper.clientToClientResponse(client);
     }
 
-    public Client findClient(String cpf) {
-        return findClientUseCase.findClient(cpf);
+    public ClientResponse findClient(String cpf) {
+
+        Client client = findClientUseCase.findClient(cpf);
+
+        return  clientMapper.clientToClientResponse(client);
     }
 }

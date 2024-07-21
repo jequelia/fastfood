@@ -7,11 +7,15 @@ public class PaymentController {
 
     private final PaymentUseCase paymentUseCase;
 
+
     public PaymentController(PaymentUseCase paymentUseCase) {
         this.paymentUseCase = paymentUseCase;
     }
 
-    public Payment processPayment(Payment payment) {
-        return paymentUseCase.processPayment(payment);
+    public String processPayment(Long lunchId) {
+
+        Payment payment = paymentUseCase.processPayment(lunchId);
+
+        return payment.getStatus();
     }
 }

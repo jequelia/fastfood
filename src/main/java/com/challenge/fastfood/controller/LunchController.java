@@ -1,6 +1,8 @@
 package com.challenge.fastfood.controller;
 
 import com.challenge.fastfood.api.request.LunchRequest;
+import com.challenge.fastfood.api.response.LunchResponse;
+import com.challenge.fastfood.infra.mapstruct.LunchMapper;
 import com.challenge.fastfood.interfaces.client.FindClientGatewayInterface;
 import com.challenge.fastfood.interfaces.lunchItem.FindLunchItemsGatewayInterface;
 import com.challenge.fastfood.aplication.usecases.lunch.CreateLunchUseCase;
@@ -19,19 +21,22 @@ public class LunchController {
     private final FindLunchUseCase findLunchUseCase;
     private final FindLunchItemsGatewayInterface findLunchItemsGatewayInterface;
     private final FindClientGatewayInterface findClientGatewayInterface;
+    private final LunchMapper lunchMapper;
+
 
     public LunchController(
             CreateLunchUseCase createLunchUseCase,
             FindLunchUseCase findLunchUseCase,
             FindLunchItemsGatewayInterface findLunch,
-            FindClientGatewayInterface findClientGatewayInterface) {
+            FindClientGatewayInterface findClientGatewayInterface, LunchMapper lunchMapper) {
         this.createLunchUseCase = createLunchUseCase;
         this.findLunchUseCase = findLunchUseCase;
         this.findLunchItemsGatewayInterface = findLunch;
         this.findClientGatewayInterface = findClientGatewayInterface;
+        this.lunchMapper = lunchMapper;
     }
 
-    public Lunch createLunch(LunchRequest lunchRequest) {
+    public LunchResponse createLunch(LunchRequest lunchRequest) {
 
         List<LunchItem> lunchItems = new ArrayList<>();
 
@@ -50,24 +55,27 @@ public class LunchController {
             lunch.setClient(client);
         }
         lunch.setLunchItems(lunchItems);
+        Lunch useCaseLunch = createLunchUseCase.createLunch(lunch);
 
-        return createLunchUseCase.createLunch(lunch);
+        return lunchMapper.lunchToLunchResponse(useCaseLunch);
     }
 
     private void mapperLunch(List<Long> lunchRequest, List<LunchItem> lunchItems) {
         for (Long lunchItem : lunchRequest) {
             LunchItem itemById = findLunchItemsGatewayInterface.findLunchItemById(lunchItem);
-            if (itemById != null){
+            if (itemById != null) {
                 lunchItems.add(itemById);
             }
         }
     }
 
-    public List<Lunch> findLunchs() {
-        return findLunchUseCase.findLunchs();
+    public List<LunchResponse> findLunchs() {
+        List<Lunch> lunchs = findLunchUseCase.findLunchs();
+        return lunchMapper.lunchsToLunchsResponse(lunchs);
     }
 
-    public Lunch findLunchById(Long id) {
-        return findLunchUseCase.findLunchById(id);
+    public LunchResponse findLunchById(Long id) {
+        Lunch lunchById = findLunchUseCase.findLunchById(id);
+        return lunchMapper.lunchToLunchResponse(lunchById);
     }
 }

@@ -127,8 +127,8 @@ public class Config {
     @Bean
     public ClientController createClientControllerAdapter(
             CreateClientUseCase clientUseCase,
-            FindClientUseCase findClientUseCase) {
-        return new ClientController(clientUseCase, findClientUseCase);
+            FindClientUseCase findClientUseCase,ClientMapper clientMapper) {
+        return new ClientController(clientUseCase, findClientUseCase, clientMapper);
     }
 
     @Bean
@@ -136,16 +136,18 @@ public class Config {
             CreateLunchUseCase createLunchUseCase,
             FindLunchUseCase findLunchUseCase,
             FindLunchItemsGatewayInterface findLunchItemsGatewayInterface,
-            FindClientGatewayInterface findClientGatewayInterface) {
-        return new LunchController(createLunchUseCase, findLunchUseCase, findLunchItemsGatewayInterface, findClientGatewayInterface);
+            FindClientGatewayInterface findClientGatewayInterface,
+            LunchMapper lunchMapper) {
+        return new LunchController(createLunchUseCase, findLunchUseCase, findLunchItemsGatewayInterface, findClientGatewayInterface,lunchMapper);
     }
 
     @Bean
     public LunchItemsController createLunchItemsControllerAdapter(
             CreateLunchItemUseCase createLunchItemUseCase,
             EditLunchItemUseCase editLunchItemUseCase,
-            FindLunchItemsUseCase findLunchItemsUseCase) {
-        return new LunchItemsController(createLunchItemUseCase, editLunchItemUseCase, findLunchItemsUseCase);
+            FindLunchItemsUseCase findLunchItemsUseCase,
+            LunchItemMapper lunchItemMapper) {
+        return new LunchItemsController(createLunchItemUseCase, editLunchItemUseCase, findLunchItemsUseCase,lunchItemMapper);
     }
 
     @Bean

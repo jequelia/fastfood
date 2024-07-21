@@ -1,8 +1,6 @@
 package com.challenge.fastfood.api;
 
-import com.challenge.fastfood.interfaces.payment.PaymentProcessGatewayInterface;
-import com.challenge.fastfood.domain.entities.Payment;
-import com.challenge.fastfood.infra.mapstruct.PaymentMapper;
+import com.challenge.fastfood.controller.PaymentController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PaymentApi {
 
-    private final PaymentProcessGatewayInterface paymentAdapterPort;
-    private final PaymentMapper paymentMapper;
+    private final PaymentController paymentController;
 
     @PostMapping("/process/{lunchId}")
     public ResponseEntity<String> processPayment(@PathVariable Long lunchId) {
-        Payment payment = paymentAdapterPort.findPaymentByLunchId(lunchId);
-        Payment processed = paymentAdapterPort.processPayment(payment);
-        return ResponseEntity.ok(processed.getStatus());
+        String status = paymentController.processPayment(lunchId);
+        return ResponseEntity.ok(status);
     }
 }

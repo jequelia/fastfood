@@ -12,7 +12,8 @@ public class PaymentUseCase {
         this.paymentProcessGatewayInterface = payment;
     }
 
-    public Payment processPayment(Payment payment) {
+    public Payment processPayment(Long lunchId) {
+        Payment payment = paymentProcessGatewayInterface.findPaymentByLunchId(lunchId);
         return paymentProcessGatewayInterface.processPayment(payment);
     }
 }
