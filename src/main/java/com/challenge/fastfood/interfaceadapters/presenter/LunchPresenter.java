@@ -27,10 +27,11 @@ public class LunchPresenter {
 
         return new LunchResponse(
                 lunchItems,
-                lunch.getStatus(),
+                lunch.getStatus().getDescricao(),
                 lunch.getClient() != null ? lunch.getClient().getCpf() : null,
                 (float) lunch.getPriceTotal(),
-                lunch.getId()
+                lunch.getId(),
+                lunch.getDate()
         );
     }
 

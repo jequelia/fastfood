@@ -1,6 +1,7 @@
 package com.challenge.fastfood.entities;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Lunch {
@@ -8,8 +9,9 @@ public class Lunch {
     private Client client;
     private List<LunchItem> lunchItems;
     private double priceTotal;
-    private String status;
+    private LunchStatus status;
     private Long id;
+    private LocalDateTime date;
 
     public Lunch(Client client, List<LunchItem> lunchItems, Long id) {
         this.client = client;
@@ -18,7 +20,7 @@ public class Lunch {
         for (LunchItem lunchItem : lunchItems) {
             this.priceTotal += lunchItem.getPrice();
         }
-        this.status = "PENDENTE";
+        this.status = LunchStatus.RECEBIDO;
         this.id = id;
     }
 
@@ -38,13 +40,6 @@ public class Lunch {
             return priceTotal;
         }
 
-    public String getStatus() {
-            return status;
-        }
-
-    public void setStatus(String status) {
-            this.status = status;
-        }
 
     public void setClient(Client client) {
             this.client = client;
@@ -66,9 +61,19 @@ public class Lunch {
         this.id = id;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
 
+    public LunchStatus getStatus() {
+        return status;
+    }
 
+    public void setStatus(LunchStatus status) {
+        this.status = status;
+    }
 
-
-
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 }

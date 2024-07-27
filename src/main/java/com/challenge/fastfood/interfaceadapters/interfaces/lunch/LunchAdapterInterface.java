@@ -9,4 +9,5 @@ public interface LunchAdapterInterface {
     Lunch findLunchById(Long id);
     Lunch saveLunch(Lunch lunch);
 
+    Lunch editLunch(Lunch lunch);
 }

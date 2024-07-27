@@ -1,9 +1,11 @@
 package com.challenge.fastfood.framework.persistence.payment;
 
-import com.challenge.fastfood.framework.persistence.lunchItem.LunchItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+@Repository
+public interface PaymentRepository  extends JpaRepository<PaymentEntity, Long>   {
 
-public interface PaymentRepository  {
+    PaymentEntity findByNumberLunch(Long numerLunch);
+
 }

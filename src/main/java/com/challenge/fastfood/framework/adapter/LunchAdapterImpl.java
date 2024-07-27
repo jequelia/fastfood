@@ -2,6 +2,7 @@ package com.challenge.fastfood.framework.adapter;
 
 import com.challenge.fastfood.entities.Lunch;
 import com.challenge.fastfood.entities.LunchItem;
+import com.challenge.fastfood.entities.LunchStatus;
 import com.challenge.fastfood.framework.mapstruct.LunchItemMapper;
 import com.challenge.fastfood.framework.mapstruct.LunchMapper;
 import com.challenge.fastfood.framework.persistence.client.ClientEntity;
@@ -13,6 +14,7 @@ import com.challenge.fastfood.interfaceadapters.interfaces.lunch.LunchAdapterInt
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +56,8 @@ public class LunchAdapterImpl implements LunchAdapterInterface {
         LunchEntity lunchEntity = new LunchEntity();
         lunchEntity.setLunchItems(lunchItems);
         lunchEntity.setClient(clientEntity);
-        lunchEntity.setStatus("PENDENTE");
+        lunchEntity.setStatus(LunchStatus.RECEBIDO.getDescricao());
+        lunchEntity.setDate(LocalDateTime.now());
         double price = 0;
         for (LunchItemEntity lunchItem : lunchItems) {
             price += lunchItem.getPrice();
@@ -71,5 +74,13 @@ public class LunchAdapterImpl implements LunchAdapterInterface {
             clientEntity = clientRepository.findById(lunch.getClient().getId()).orElse(null);
         }
         return clientEntity;
+    }
+
+    @Override
+    public Lunch editLunch(Lunch lunch) {
+        LunchEntity lunchEntity = lunchMapper.lunchToLunchEntity(lunch);
+        LunchEntity save = lunchRepository.save(lunchEntity);
+        return lunchMapper.lunchEntityToLunch(save);
+
     }
 }

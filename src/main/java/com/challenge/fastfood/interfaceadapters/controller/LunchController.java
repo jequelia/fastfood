@@ -3,14 +3,20 @@ package com.challenge.fastfood.interfaceadapters.controller;
 import com.challenge.fastfood.interfaceadapters.controller.request.LunchRequest;
 import com.challenge.fastfood.interfaceadapters.controller.response.LunchResponse;
 import com.challenge.fastfood.interfaceadapters.gateways.client.FindClientGatewayImpl;
+import com.challenge.fastfood.interfaceadapters.gateways.lunch.EditLunchGatewayImpl;
 import com.challenge.fastfood.interfaceadapters.gateways.lunch.SaveLunchGatewayImpl;
+import com.challenge.fastfood.interfaceadapters.gateways.payment.PaymentImplGatewayImpl;
+import com.challenge.fastfood.interfaceadapters.interfaces.lunch.EditLunchGatewayInterface;
 import com.challenge.fastfood.interfaceadapters.interfaces.lunch.LunchAdapterInterface;
+import com.challenge.fastfood.interfaceadapters.interfaces.payment.PaymentAdapterInterface;
+import com.challenge.fastfood.interfaceadapters.interfaces.payment.PaymentProcessGatewayInterface;
 import com.challenge.fastfood.interfaceadapters.presenter.LunchPresenter;
 import com.challenge.fastfood.interfaceadapters.interfaces.client.FindClientGatewayInterface;
 import com.challenge.fastfood.interfaceadapters.interfaces.lunch.FindLunchGatewayInterface;
 import com.challenge.fastfood.interfaceadapters.interfaces.lunch.SaveLunchGatewayInterface;
 import com.challenge.fastfood.interfaceadapters.interfaces.lunchItem.FindLunchItemsGatewayInterface;
 import com.challenge.fastfood.interfaceadapters.interfaces.lunchItem.LunchItemAdapterInterface;
+import com.challenge.fastfood.usecases.lunch.EditLunchUseCase;
 import com.challenge.fastfood.usecases.lunchItem.FindLunchItemsUseCase;
 import com.challenge.fastfood.interfaceadapters.gateways.lunch.FindLunchGatewayImpl;
 import com.challenge.fastfood.interfaceadapters.gateways.lunchItem.FindLunchItemsGatewayImpl;
@@ -29,11 +35,13 @@ public class LunchController {
     private final ClientAdapterInterface clientAdapter;
     private final LunchAdapterInterface lunchAdapter;
     private final LunchItemAdapterInterface lunchItemAdapter;
+    private final PaymentAdapterInterface paymentAdapterInterface;
 
-    public LunchController(ClientAdapterInterface clientAdapter, LunchAdapterInterface lunchAdapter, LunchItemAdapterInterface lunchItemAdapter) {
+    public LunchController(ClientAdapterInterface clientAdapter, LunchAdapterInterface lunchAdapter, LunchItemAdapterInterface lunchItemAdapter, PaymentAdapterInterface paymentAdapterInterface) {
         this.clientAdapter = clientAdapter;
         this.lunchAdapter = lunchAdapter;
         this.lunchItemAdapter = lunchItemAdapter;
+        this.paymentAdapterInterface = paymentAdapterInterface;
     }
 
     public LunchResponse createLunch(LunchRequest lunchRequest) {
@@ -83,5 +91,16 @@ public class LunchController {
         FindLunchUseCase findLunchUseCase  = new FindLunchUseCase(findLunchGatewayInterface);
         Lunch lunchById = findLunchUseCase.findLunchById(id);
         return  LunchPresenter.lunchToLunchResponse(lunchById);
+    }
+
+    public LunchResponse editLunchStatus(Long lunchId, String newStatus){
+        FindLunchGatewayInterface findLunchGatewayInterface = new FindLunchGatewayImpl(lunchAdapter);
+        EditLunchGatewayInterface editLunchGatewayInterface = new EditLunchGatewayImpl(lunchAdapter);
+        PaymentProcessGatewayInterface paymentProcessGatewayInterface = new PaymentImplGatewayImpl(paymentAdapterInterface);
+
+        EditLunchUseCase editLunchUseCase = new EditLunchUseCase(findLunchGatewayInterface,editLunchGatewayInterface,paymentProcessGatewayInterface);
+        Lunch lunch = editLunchUseCase.updateLunchStatus(lunchId, newStatus);
+        return LunchPresenter.lunchToLunchResponse(lunch);
+
     }
 }

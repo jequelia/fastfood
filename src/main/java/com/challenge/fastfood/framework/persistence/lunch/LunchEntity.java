@@ -5,6 +5,7 @@ import com.challenge.fastfood.framework.persistence.lunchItem.LunchItemEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "lunch")
@@ -36,4 +37,8 @@ public class LunchEntity {
 
     @Column(name= "price_total")
     private double priceTotal;
+
+    @Column(name= "date")
+    private LocalDateTime date;
+
 }
