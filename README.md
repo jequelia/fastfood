@@ -79,6 +79,9 @@ docker compose up
 ### Desenho da arquitetura de negócio
 ![image](https://github.com/user-attachments/assets/99041874-f4b6-4fb4-8e6d-8d1254d12b26)
 
+### Desenho da arquitetura da infraestrutura:
+![image](https://github.com/user-attachments/assets/c0f0a42f-df07-4136-b8ab-e1ed2acb8763)
+
 
 ### Funcionamento
 ## Como criar um cluster Kubernetes local
