@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  # namespace: cluster-fastfood
+data:
+  MYSQL_URL: "jdbc:mysql://mysql:3306/fastfood"
