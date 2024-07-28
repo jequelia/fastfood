@@ -35,14 +35,7 @@ Para solucionar o problema, a lanchonete irá investir em um sistema de autoaten
 - Observação: A aplicação deve ser entregue com um Dockerfile configurado para executá-la corretamente, e um docker-compose.yml para subir o ambiente completo.
 
 ### Desenvolvimento
-Foi desenvolvida uma aplicação *back-end* em Java Spring Boot, contendo um conjunto de APIs, um banco de dados não-relacional MySQL, um Dockerfile e um Docker Compose. Utilizou-se os princípios da **arquitetura clean code e clean architecture** para estruturar a aplicação de maneira modularizada, coesa, e escalável.
-
-### Desenho da estrutura da arquitetura no código
-![image](https://github.com/user-attachments/assets/0b31b8c9-552d-432d-ab81-03576bca3305)
-
-### Desenho da arquitetura de negócio
-![image](https://github.com/user-attachments/assets/99041874-f4b6-4fb4-8e6d-8d1254d12b26)
-
+Foi desenvolvida uma aplicação *back-end* em Java Spring Boot, contendo um conjunto de APIs, um banco de dados não-relacional MySQL, um Dockerfile e um Docker Compose. Utilizou-se os princípios da **arquitetura hexagonal** para estruturar a aplicação de maneira modularizada, coesa, e escalável.
 
 ### Roadmap
 - [x] Criação do **modelo Event Storming** utilizando a ferramenta *Miro* [link](https://miro.com/app/board/uXjVKX1KHs0=/?share_link_id=306947055624)
@@ -79,6 +72,13 @@ docker compose up
  - Colection com todas as APIs desenvolvidas com exemplos de requisição.
  - Guia completo com todas as instruções para execução do projeto.
  - Link para vídeo demonstrando a arquitetura.
+
+### Desenho da estrutura da arquitetura no código
+![image](https://github.com/user-attachments/assets/0b31b8c9-552d-432d-ab81-03576bca3305)
+
+### Desenho da arquitetura de negócio
+![image](https://github.com/user-attachments/assets/99041874-f4b6-4fb4-8e6d-8d1254d12b26)
+
 
 ### Funcionamento
 ## Como criar um cluster Kubernetes local
