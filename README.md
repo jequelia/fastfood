@@ -116,6 +116,9 @@ kubectl apply -f app-hpa.yaml
 ## Adminer 
 É possível acessar o banco de dados via Adminer [clicando aqui](http://localhost:30000/http://localhost:30000/).
 
+## Vídeo
+É possível o vídeo com explicações sobre a arquitetura e infraestrutura [clicando aqui](https://youtu.be/mXX1s7UK7mU).
+
 ## Contatos
 - [Sara Akemi Watanabe](https://github.com/SaraAWatanabe)
 - [Jequelia Santana Gomes](https://github.com/jequelia)
