@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mysql-config
-  # namespace: cluster-fastfood
+  namespace: cluster-fastfood
 data:
   MYSQL_DATABASE: "fastfood"
   MYSQL_TEST_DATABASE: "fastfood_test"

@@ -2,13 +2,13 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: app-hpa
-  # namespace: cluster-fastfood
+  namespace: cluster-fastfood
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: app
-  minReplicas: 1
+  minReplicas: 2
   maxReplicas: 10
   metrics:
   - type: Resource

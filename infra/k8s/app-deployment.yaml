@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app
-  # namespace: cluster-fastfood
+  namespace: cluster-fastfood
 spec: 
   replicas: 2
   selector:
