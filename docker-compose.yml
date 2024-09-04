@@ -25,19 +25,28 @@ services:
     networks:
       - local-network
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  newrelic-agent:
+    image: newrelic/infrastructure:latest
+    cap_add:
+      - SYS_PTRACE
     environment:
-        - MYSQL_URL=jdbc:mysql://mysql:3306/fastfood
-    ports:
-      - "8081:8081"
+      - NRIA_LICENSE_KEY=33352751491fa0defac08a899f117bb0FFFFNRAL
     networks:
       - local-network
-    depends_on:
-      mysql:
-        condition: service_healthy
+
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    environment:
+#        - MYSQL_URL=jdbc:mysql://mysql:3306/fastfood
+#    ports:
+#      - "8081:8081"
+#    networks:
+#      - local-network
+#    depends_on:
+#      mysql:
+#        condition: service_healthy
 
 networks:
   local-network:

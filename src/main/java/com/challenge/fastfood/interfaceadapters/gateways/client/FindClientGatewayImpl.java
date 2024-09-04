@@ -8,6 +8,7 @@ public class FindClientGatewayImpl implements FindClientGatewayInterface {
 
     private final ClientAdapterInterface clientAdapter;
 
+
     public FindClientGatewayImpl(ClientAdapterInterface clientAdapter) {
         this.clientAdapter = clientAdapter;
     }

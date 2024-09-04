@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ClientApi {
 
+
     private ClientController clientController;
     private final ClientAdapterImpl clientAdapter;
 
