@@ -36,9 +36,10 @@ public class PaymentUseCase {
 
                 if("SUCCESS".equals(paymentByLunchId.getStatus())){
                     throw new PaymentException("Pagamento já foi processado com sucesso");
-                }else{
-                    throw new PaymentException("Processando pagamento");
                 }
+//                else{
+//                    throw new PaymentException("Processando pagamento");
+//                }
             }
 
             if(!Objects.equals(payment.getCpf(), lunchById.getClient().getCpf())){
@@ -54,6 +55,7 @@ public class PaymentUseCase {
             transactionID = paymentProcessGatewayInterface.processPayment(payment);
             savedPayment.setTransactionId(transactionID);
             savedPayment.setCpf(lunchById.getClient().getCpf());
+            savedPayment.setEmailClient(lunchById.getClient().getEmail());
             savedPayment.setPriceTotal(lunchById.getPriceTotal());
 
         } catch (IOException | InterruptedException e) {

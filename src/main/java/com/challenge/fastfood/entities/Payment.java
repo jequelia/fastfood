@@ -6,6 +6,7 @@ public class Payment {
     private Long id;
     private String status;
     private String cpf;
+    private String emailClient;
     private double priceTotal;
     private Long numberLunch;
     private String transactionId;
@@ -66,5 +67,13 @@ public class Payment {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public String getEmailClient() {
+        return emailClient;
+    }
+
+    public void setEmailClient(String emailClient) {
+        this.emailClient = emailClient;
     }
 }

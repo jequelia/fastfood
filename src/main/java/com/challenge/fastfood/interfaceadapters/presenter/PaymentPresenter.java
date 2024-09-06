@@ -17,6 +17,7 @@ public class PaymentPresenter {
         }
         Payment payment = new Payment();
         payment.setCpf(paymentRequest.cpf());
+        payment.setEmailClient(paymentRequest.emailClient());
         payment.setNumberLunch(paymentRequest.numberLunch());
         payment.setPriceTotal(paymentRequest.value());
         return payment;
