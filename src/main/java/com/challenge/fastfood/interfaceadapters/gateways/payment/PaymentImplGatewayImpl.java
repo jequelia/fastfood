@@ -21,6 +21,11 @@ public class PaymentImplGatewayImpl implements PaymentProcessGatewayInterface {
     }
 
     @Override
+    public Payment findPaymentByTransactionId(String transactionId) {
+        return paymentAdapter.findPaymentByTransactionId(transactionId);
+    }
+
+    @Override
     public String checkPaymentStatus(String transactionId) throws Exception {
        return  paymentAdapter.checkPaymentStatus(transactionId);
     }
@@ -31,7 +36,7 @@ public class PaymentImplGatewayImpl implements PaymentProcessGatewayInterface {
     }
 
     @Override
-    public String processPayment(Payment payment) throws IOException {
+    public Payment processPayment(Payment payment) throws IOException {
         return paymentAdapter.httpRequestPayment(payment);
     }
 

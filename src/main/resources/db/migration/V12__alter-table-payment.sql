@@ -1,0 +1,2 @@
+ALTER TABLE payment
+ADD COLUMN ticket_url VARCHAR(200) NULL;

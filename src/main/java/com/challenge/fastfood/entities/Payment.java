@@ -10,6 +10,8 @@ public class Payment {
     private double priceTotal;
     private Long numberLunch;
     private String transactionId;
+    private String qrCode;
+    private String ticketUrl;
 
     public Payment(Long idLunch) {
         this.numberLunch = idLunch;
@@ -75,5 +77,21 @@ public class Payment {
 
     public void setEmailClient(String emailClient) {
         this.emailClient = emailClient;
+    }
+
+    public String getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
+    }
+
+    public String getTicketUrl() {
+        return ticketUrl;
+    }
+
+    public void setTicketUrl(String ticketUrl) {
+        this.ticketUrl = ticketUrl;
     }
 }

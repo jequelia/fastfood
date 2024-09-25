@@ -50,10 +50,13 @@ public class PaymentUseCase {
             payment.setStatus("PENDING");
         }
         Payment savedPayment = paymentProcessGatewayInterface.savePayment(payment);
-        String transactionID = null;
+        String paymenttransactionID = null;
         try {
-            transactionID = paymentProcessGatewayInterface.processPayment(payment);
-            savedPayment.setTransactionId(transactionID);
+            Payment processPayment = paymentProcessGatewayInterface.processPayment(payment);
+            paymenttransactionID = processPayment.getTransactionId();
+            savedPayment.setTransactionId(paymenttransactionID);
+            savedPayment.setQrCode(processPayment.getQrCode());
+            savedPayment.setTicketUrl(processPayment.getTicketUrl());
             savedPayment.setCpf(lunchById.getClient().getCpf());
             savedPayment.setEmailClient(lunchById.getClient().getEmail());
             savedPayment.setPriceTotal(lunchById.getPriceTotal());
@@ -64,13 +67,13 @@ public class PaymentUseCase {
         return  paymentProcessGatewayInterface.savePayment(savedPayment);
     }
 
-    public Payment checkPaymentStatus(Long numberLunch) throws Exception {
-        Payment paymentByLunchId = paymentProcessGatewayInterface.findPaymentByLunchId(numberLunch);
+    public Payment checkPaymentStatus(String transactionId) throws Exception {
+        Payment paymentByTransactionId = paymentProcessGatewayInterface.findPaymentByTransactionId(transactionId);
 
-        String paymentStatus = paymentProcessGatewayInterface.checkPaymentStatus(paymentByLunchId.getTransactionId());
+        String paymentStatus = paymentProcessGatewayInterface.checkPaymentStatus(paymentByTransactionId.getTransactionId());
 
-        paymentByLunchId.setStatus(paymentStatus);
+        paymentByTransactionId.setStatus(paymentStatus);
 
-        return paymentProcessGatewayInterface.savePayment(paymentByLunchId);
+        return paymentProcessGatewayInterface.savePayment(paymentByTransactionId);
     }
 }

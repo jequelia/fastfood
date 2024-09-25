@@ -31,4 +31,10 @@ public class PaymentEntity {
 
     @Column(nullable = true, name= "transactionId")
     private String transactionId;
+
+    @Column(name="qr_code")
+    private String qrCode;
+
+    @Column(name="ticket_url")
+    private String ticketUrl;
 }

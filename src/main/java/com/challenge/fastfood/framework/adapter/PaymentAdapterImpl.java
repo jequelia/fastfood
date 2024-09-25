@@ -64,7 +64,13 @@ public class PaymentAdapterImpl implements PaymentAdapterInterface {
     }
 
     @Override
-    public String httpRequestPayment(Payment payment)  {
+    public Payment findPaymentByTransactionId(String transactionId) {
+        PaymentEntity payment = paymentRepository.findPaymentByTransactionId(transactionId);
+        return paymentMapper.toPayment(payment);
+    }
+
+    @Override
+    public Payment httpRequestPayment(Payment payment)  {
 
         MercadoPagoConfig.setAccessToken(accessToken);
         MercadoPagoConfig.setLoggingLevel(Level.FINEST);
@@ -95,7 +101,7 @@ public class PaymentAdapterImpl implements PaymentAdapterInterface {
 
 
         if(this.apiUrl != null && !this.apiUrl.isBlank()) {
-            notificationUrl = apiUrl + "/mercado-pago/webhook";
+            notificationUrl = apiUrl + "/payment/webhook";
         }
 
         log.info("notificationUrl: {}", notificationUrl);
@@ -116,7 +122,7 @@ public class PaymentAdapterImpl implements PaymentAdapterInterface {
             com.mercadopago.resources.payment.Payment paymentResponse = paymentClient.create(createRequest);
             if(PaymentStatus.PENDING.equals(paymentResponse.getStatus())) {
                 Payment paymentDomain = this.paymentMapper.toPaymentDomain(paymentResponse);
-                return paymentDomain.getTransactionId();
+                return paymentDomain;
             } else {
                 throw new PaymentException("Falha para criar pagamento");
             }
@@ -139,6 +145,8 @@ public class PaymentAdapterImpl implements PaymentAdapterInterface {
         MercadoPagoConfig.setLoggingLevel(Level.WARNING);
 
         PaymentClient paymentClient = new PaymentClient();
+
+
 
         MPRequestOptions.builder()
                 .connectionRequestTimeout(2000)

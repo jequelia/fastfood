@@ -15,6 +15,8 @@ public interface PaymentMapper {
     PaymentEntity toPaymentEntity(Payment payment);
     @Mapping(source = "id", target = "transactionId")
     @Mapping(target = "id", ignore = true)
+    @Mapping(source = "pointOfInteraction.transactionData.qrCode", target = "qrCode")
+    @Mapping(source = "pointOfInteraction.transactionData.ticketUrl", target = "ticketUrl")
     Payment toPaymentDomain(com.mercadopago.resources.payment.Payment payment);
 
 

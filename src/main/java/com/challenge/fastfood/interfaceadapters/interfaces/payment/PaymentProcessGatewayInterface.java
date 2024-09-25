@@ -7,8 +7,9 @@ import java.io.IOException;
 
 public interface PaymentProcessGatewayInterface {
 
-    String processPayment(Payment payment) throws IOException, InterruptedException;
+    Payment processPayment(Payment payment) throws IOException, InterruptedException;
     Payment findPaymentByLunchId(Long lunchId);
+    Payment findPaymentByTransactionId(String transactionId);
     String checkPaymentStatus(String transactionId) throws Exception;
     Payment savePayment(Payment payment);
 }

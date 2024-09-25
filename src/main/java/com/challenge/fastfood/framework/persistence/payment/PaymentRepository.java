@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 public interface PaymentRepository  extends JpaRepository<PaymentEntity, Long>   {
 
     PaymentEntity findByNumberLunch(Long numerLunch);
+    PaymentEntity findPaymentByTransactionId(String transactionId);
 
 }

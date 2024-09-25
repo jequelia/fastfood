@@ -1,0 +1,2 @@
+ALTER TABLE payment
+ADD COLUMN qr_code VARCHAR(200) NULL;

@@ -4,6 +4,7 @@ import com.challenge.fastfood.config.exception.ClientException;
 import com.challenge.fastfood.entities.Client;
 import com.challenge.fastfood.entities.LunchItem;
 import com.challenge.fastfood.entities.Payment;
+import com.challenge.fastfood.interfaceadapters.controller.PaymentReturnMercadoPago;
 import com.challenge.fastfood.interfaceadapters.controller.request.ClientRequest;
 import com.challenge.fastfood.interfaceadapters.controller.request.PaymentRequest;
 import com.challenge.fastfood.interfaceadapters.controller.response.LunchItemResponse;
@@ -21,6 +22,18 @@ public class PaymentPresenter {
         payment.setNumberLunch(paymentRequest.numberLunch());
         payment.setPriceTotal(paymentRequest.value());
         return payment;
+    }
+
+    public PaymentReturnMercadoPago toPaymentReturnMercadoPago(Payment payment) {
+        if (payment == null) {
+            throw new ClientException("Payment cannot be null");
+        }
+        return new PaymentReturnMercadoPago(
+
+                payment.getQrCode(),
+                payment.getTicketUrl()
+
+        );
     }
 
 

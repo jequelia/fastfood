@@ -1,6 +1,8 @@
 package com.challenge.fastfood.framework.api;
 
 import com.challenge.fastfood.interfaceadapters.controller.PaymentController;
+import com.challenge.fastfood.interfaceadapters.controller.PaymentReturnMercadoPago;
+import com.challenge.fastfood.interfaceadapters.controller.request.PaymentMercadoPago;
 import com.challenge.fastfood.interfaceadapters.controller.request.PaymentRequest;
 import com.challenge.fastfood.interfaceadapters.controller.response.PaymentResponse;
 import com.challenge.fastfood.interfaceadapters.interfaces.lunch.LunchAdapterInterface;
@@ -22,27 +24,40 @@ public class PaymentApi {
     private final LunchAdapterInterface lunchAdapter;
 
 
-    @PostMapping("/webhook")
-    public ResponseEntity<String> webhook(@RequestBody PaymentRequest paymentRequest) {
+    @PostMapping("/create")
+    public ResponseEntity<PaymentReturnMercadoPago> create(@RequestBody PaymentRequest paymentRequest) {
         try {
             paymentController = new PaymentController(paymentAdapter,lunchAdapter);
-            String status = paymentController.processPayment(paymentRequest);
-            return ResponseEntity.ok(status);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/consult_payment_status/{numberLunch}")
-    public ResponseEntity<PaymentResponse> consultPaymentStatus(@PathVariable Long numberLunch) {
-        try {
-            paymentController = new PaymentController(paymentAdapter,lunchAdapter);
-            PaymentResponse status = paymentController.consultPaymentStatus(numberLunch);
-            return ResponseEntity.ok(status);
+            PaymentReturnMercadoPago payment = paymentController.processPayment(paymentRequest);
+            return ResponseEntity.ok(payment);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(null);
         }
     }
+
+    @PostMapping("/webhook")
+    public ResponseEntity<PaymentResponse> webhook(@RequestBody PaymentMercadoPago paymentRequest) {
+        try {
+            paymentController = new PaymentController(paymentAdapter,lunchAdapter);
+            String transactionID = paymentRequest.getData().getId();
+            PaymentResponse payment = paymentController.consultPaymentStatus(transactionID);
+            return ResponseEntity.ok(payment);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+    }
+
+//    @GetMapping("/consult_payment_status/{numberLunch}")
+//    public ResponseEntity<PaymentResponse> consultPaymentStatus(@PathVariable Long numberLunch) {
+//        try {
+//            paymentController = new PaymentController(paymentAdapter,lunchAdapter);
+//            PaymentResponse status = paymentController.consultPaymentStatus(numberLunch);
+//            return ResponseEntity.ok(status);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(null);
+//        }
+//    }
 }

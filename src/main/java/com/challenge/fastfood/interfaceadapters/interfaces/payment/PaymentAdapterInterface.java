@@ -7,7 +7,8 @@ public interface PaymentAdapterInterface {
 
     Payment savePayment(Payment payment);
     Payment findByNumberLunch(Long numberLunch);
-    String httpRequestPayment(Payment payment) throws JsonProcessingException;
+    Payment findPaymentByTransactionId(String transactionId);
+    Payment httpRequestPayment(Payment payment) throws JsonProcessingException;
     String checkPaymentStatus(String transactionId) throws Exception;
 
 

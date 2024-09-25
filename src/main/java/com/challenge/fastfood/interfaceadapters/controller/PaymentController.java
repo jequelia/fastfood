@@ -22,7 +22,7 @@ public class PaymentController {
         this.lunchAdapter = lunchAdapter;
     }
 
-    public String processPayment(PaymentRequest paymentRequest) {
+    public PaymentReturnMercadoPago processPayment(PaymentRequest paymentRequest) {
         PaymentProcessGatewayInterface paymentProcessGatewayInterface = new PaymentImplGatewayImpl(paymentAdapter);
         FindLunchGatewayInterface findLunchGatewayInterface = new FindLunchGatewayImpl(lunchAdapter);
 
@@ -30,15 +30,15 @@ public class PaymentController {
         PaymentPresenter paymentPresenter = new PaymentPresenter();
         Payment toPayment = paymentPresenter.toPayment(paymentRequest);
         Payment payment = paymentUseCase.processPayment(toPayment);
-        return payment.getStatus();
+        return paymentPresenter.toPaymentReturnMercadoPago(payment);
     }
 
-    public PaymentResponse consultPaymentStatus(Long numberLunch) throws Exception {
+    public PaymentResponse consultPaymentStatus(String transactionId) throws Exception {
         PaymentProcessGatewayInterface paymentProcessGatewayInterface = new PaymentImplGatewayImpl(paymentAdapter);
         FindLunchGatewayInterface findLunchGatewayInterface = new FindLunchGatewayImpl(lunchAdapter);
 
         PaymentUseCase paymentUseCase = new PaymentUseCase(paymentProcessGatewayInterface,findLunchGatewayInterface);
-        Payment payment = paymentUseCase.checkPaymentStatus(numberLunch);
+        Payment payment = paymentUseCase.checkPaymentStatus(transactionId);
         PaymentPresenter paymentPresenter = new PaymentPresenter();
         return paymentPresenter.toPaymentResponse(payment);
 
